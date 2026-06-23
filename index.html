@@ -61,6 +61,7 @@
       height:73px;
       object-fit:contain;
       display:block;
+      clip-path: inset(0 0 23px 0); /* تم إضافة هذا السطر لقص الـ 23 بكسل السفلية التي تحتوي على العلامة المائية */
     }
 
     .card{
@@ -378,7 +379,6 @@
       gap: 6px;
     }
 
-    /* CSS لتنسيق أزرار الكمية الجديدة داخل السلة */
     .quantity-control {
       display: flex;
       align-items: center;
@@ -872,7 +872,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   cartContainer.addEventListener("click", async (e) => {
-    // منع النسخ عند النقر على أزرار التحكم
     if(e.target.closest(".delete-btn") || e.target.closest(".checkout-btn") || e.target.closest(".add-more-btn") || e.target.closest(".qty-btn")) return;
     const copyText = cartContainer.dataset.copyText || "";
     if(!copyText) return;
@@ -882,7 +881,6 @@ document.addEventListener("DOMContentLoaded", () => {
   addToCartBtn.addEventListener("click", () => {
     trackButtonEvent("أضف إلى السلة");
     if(tempItem) {
-      // التحقق مما إذا كان هذا القياس موجوداً مسبقاً في السلة لزيادة الكمية فقط
       const existingItemIndex = cart.findIndex(item => item.shape === tempItem.shape && item.dimsText === tempItem.dimsText);
       
       if (existingItemIndex > -1) {
@@ -956,7 +954,6 @@ document.addEventListener("DOMContentLoaded", () => {
       dimsCopyText = `${h}`;
     }
 
-    // تعيين الكمية الافتراضية إلى 1 عند الحساب
     tempItem = {
       shape: shape,
       dimsText: dimsText,
@@ -1023,7 +1020,6 @@ document.addEventListener("DOMContentLoaded", () => {
     resultBox.dataset.copyText = `السعر مع التوصيل: ${formatPriceTextForCopy(priceWithDelivery)}\nالوزن للقياس ${dimsCopyText} = ${formatWeightTextForCopy(Number(weight))}`;
 
     resultBox.classList.add("show");
-    
     addToCartBtn.style.display = "flex";
   });
 
@@ -1044,7 +1040,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let subtotal = 0;
 
     cart.forEach((item, index) => {
-      // ضرب السعر في الكمية لحساب المجموع الفرعي
       subtotal += (item.price * item.quantity);
 
       let shapeTitleText = "";
@@ -1055,7 +1050,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const itemDiv = document.createElement("div");
       itemDiv.className = "cart-item";
       
-      // دمج أزرار التحكم بالكمية في واجهة العنصر
       itemDiv.innerHTML = `
         <div class="cart-item-right">
           <span class="cart-item-title">${index + 1}. ${shapeTitleText}</span>
@@ -1078,7 +1072,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
-      // برمجة زر الزيادة
       const plusBtn = itemDiv.querySelector(".plus-btn");
       plusBtn.onclick = (e) => {
         e.stopPropagation();
@@ -1086,7 +1079,6 @@ document.addEventListener("DOMContentLoaded", () => {
         updateCartUI();
       };
 
-      // برمجة زر النقصان
       const minusBtn = itemDiv.querySelector(".minus-btn");
       minusBtn.onclick = (e) => {
         e.stopPropagation();
@@ -1096,7 +1088,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       };
 
-      // برمجة زر الحذف
       const deleteBtn = itemDiv.querySelector(".delete-btn");
       deleteBtn.onclick = (e) => {
         e.stopPropagation();
@@ -1112,7 +1103,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cartSubtotalEl.textContent = fmt(subtotal);
     cartTotalEl.textContent = fmt(grandTotal);
 
-    // تحديث رسالة الواتساب لتشمل الكميات
     let msg = "🧾 تفاصيل الطلب:\n\n";
     cart.forEach((item, index) => {
       let shapeTitleText = "";

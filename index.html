@@ -1,1151 +1,808 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
+
+
+Rolls pricing · HTML
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>حاسبة السعر والتفاصيل</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MR5JHB74D0"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MR5JHB74D0');
-  </script>
-
-  <style>
-    :root{
-      --primary:#18dcd8;
-      --primary-700:#12b7b4;
-      --success:#2fbf71;
-      --success-700:#259c5d;
-      --blue:#3b82f6;
-      --blue-700:#2563eb;
-      --text:#1f2a2e;
-      --radius:14px;
-      --radius-lg:18px;
-    }
-
-    *{box-sizing:border-box;}
-    html,body{margin:0;padding:0;}
-
-    body{
-      font-family:'IBM Plex Sans Arabic', sans-serif;
-      background:#ffffff;
-      color:var(--text);
-      min-height:100vh;
-    }
-
-    .wrap{
-      background:#ffffff;
-      padding-bottom:40px;
-    }
-
-    header.site-head{
-      width:100%;
-      height:50px;
-      padding:0 18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(90deg,var(--primary),var(--primary-700));
-      box-shadow:0 2px 4px rgba(0,0,0,.08);
-    }
-
-    .logo img{
-      height:73px;
-      object-fit:contain;
-      display:block;
-      clip-path: inset(0 0 23px 0); /* تم إضافة هذا السطر لقص الـ 23 بكسل السفلية التي تحتوي على العلامة المائية */
-    }
-
-    .card{
-      width:100%;
-      max-width:480px;
-      margin:18px auto 0;
-    }
-
-    .card-head{
-      padding:16px 18px 6px;
-      text-align:center;
-      background:#fff;
-    }
-
-    .card-title{
-      font-size:1.05rem;
-      font-weight:700;
-      margin:0;
-      color:#0e3f3f;
-    }
-
-    .card-sub{
-      font-size:.82rem;
-      margin:4px 0 0;
-      color:#6b7b80;
-    }
-
-    .title-divider{
-      width:100%;
-      max-width:480px;
-      margin:10px auto 18px;
-      height:1px;
-      background:linear-gradient(to right, transparent, var(--primary), transparent);
-      position:relative;
-    }
-
-    .title-divider .arrow-down{
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%) rotate(45deg);
-      width:12px;
-      height:12px;
-      border:solid var(--primary);
-      border-width:0 2px 2px 0;
-      border-radius:2px;
-      background:#fff;
-    }
-
-    form.content{
-      padding:16px 18px 18px;
-      display:grid;
-      gap:14px;
-    }
-
-    .grid{
-      display:grid;
-      gap:12px;
-      grid-template-columns:1fr;
-    }
-
-    @media(min-width:640px){
-      .grid{
-        grid-template-columns:1fr 1fr;
-      }
-    }
-
-    label{
-      font-weight:600;
-      font-size:.95rem;
-      margin-bottom:4px;
-      color:#123;
-      position:relative;
-      right:2px;
-      display:block;
-    }
-
-    input[type="text"].num-input,
-    select{
-      width:100%;
-      padding:12px 14px;
-      font-size:1rem;
-      border:1px solid #d9e5e6;
-      border-radius:var(--radius);
-      background:#fff;
-      -webkit-appearance:none;
-      appearance:none;
-    }
-
-    input[type="text"].num-input:focus,
-    select:focus{
-      outline:none !important;
-      border-color:var(--primary) !important;
-      box-shadow:0 0 6px rgba(24,220,216,0.45) !important;
-    }
-
-    .select-wrap{
-      position:relative;
-    }
-
-    .select-wrap select{
-      padding-right:32px;
-    }
-
-    .select-wrap .select-icon{
-      position:absolute;
-      right:10px;
-      top:50%;
-      transform:translateY(-50%);
-      color:var(--primary);
-      font-size:1.1rem;
-      pointer-events:none;
-    }
-
-    #calcBtn{
-      width:100%;
-      padding:12px 16px;
-      border:none;
-      border-radius:var(--radius);
-      background:linear-gradient(180deg,var(--primary),var(--primary-700));
-      color:#fff;
-      font-weight:800;
-      font-size:1.1rem;
-      cursor:pointer;
-      box-shadow:0 6px 14px rgba(18,220,216,.25);
-      font-family:'IBM Plex Sans Arabic', sans-serif;
-    }
-
-    #result{
-      margin-top:4px;
-      padding:14px 14px 16px;
-      border-radius:var(--radius-lg);
-      border:1px solid rgba(24,220,216,.22);
-      background:rgba(255,255,255,.6);
-      box-shadow:0 12px 30px rgba(0,0,0,.08);
-      display:none;
-      cursor:pointer;
-    }
-
-    #result.show{
-      display:block;
-    }
-
-    #result .row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:8px 0;
-      border-bottom:1px dashed rgba(0,0,0,.06);
-      gap:10px;
-    }
-
-    #result .row:last-of-type{
-      border-bottom:none;
-    }
-
-    #result .row-main{
-      display:flex;
-      align-items:flex-start;
-      gap:6px;
-    }
-
-    #result .label-wrap{
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      gap:2px;
-    }
-
-    #result i{
-      color:var(--primary);
-      width:20px;
-      text-align:center;
-      margin-top:2px;
-    }
-
-    #result .label{
-      font-weight:700;
-      color:#0e3f3f;
-      line-height:1.2;
-    }
-
-    #result .value{
-      display:flex;
-      align-items:center;
-      color:#133;
-      direction:rtl;
-      text-align:left;
-    }
-
-    #result .value .num{
-      direction:ltr;
-      unicode-bidi:embed;
-    }
-
-    #result .value .unit{
-      margin-right:6px;
-    }
-
-    .order-button{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width:100%;
-      margin-top:12px;
-      padding:11px 16px;
-      border-radius:calc(var(--radius) + 4px);
-      font-weight:800;
-      font-size:1.05rem;
-      text-decoration:none;
-      cursor: pointer;
-      border: none;
-      font-family: 'IBM Plex Sans Arabic', sans-serif;
-    }
-
-    .checkout-btn {
-      color:#fff;
-      background:linear-gradient(180deg,var(--success),var(--success-700));
-      box-shadow:0 10px 24px rgba(37,156,93,.26);
-    }
-
-    .add-to-cart-btn {
-      background: rgba(24, 220, 216, 0.12); 
-      color: #0e3f3f; 
-      border: 1px solid rgba(24, 220, 216, 0.4);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      margin-top: 14px;
-    }
-
-    .add-to-cart-btn:hover {
-      background: rgba(24, 220, 216, 0.25);
-      border-color: #18dcd8;
-      box-shadow: 0 6px 15px rgba(24, 220, 216, 0.15);
-      transform: translateY(-1px);
-    }
-
-    .add-to-cart-btn i {
-      margin-right: 8px;
-      animation: cart-bounce 0.8s infinite;
-    }
-
-    @keyframes cart-bounce {
-      0%, 100% { transform: translateX(0) scale(1); }
-      30% { transform: translateX(-4px) scale(1.1); }
-      50% { transform: translateX(2px) scale(1.1) rotate(-5deg); }
-      70% { transform: translateX(-2px) scale(1.1) rotate(5deg); }
-    }
-
-    .cart-card {
-      border: 2px solid var(--primary);
-      border-radius: var(--radius-lg);
-      margin-top: 25px;
-      overflow: hidden;
-      width: calc(100% - 36px); 
-      max-width: 444px;
-      margin-left: auto;
-      margin-right: auto;
-      cursor: pointer; 
-    }
-
-    .cart-header {
-      background: rgba(24,220,216,.1);
-      padding: 12px 18px;
-      text-align: center;
-      border-bottom: 1px solid rgba(24,220,216,.2);
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 18px;
-      border-bottom: 1px dashed rgba(0,0,0,.08);
-      gap: 10px;
-    }
-
-    .cart-item:last-child {
-      border-bottom: none;
-    }
-
-    .cart-item-right {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch; 
-      gap: 6px; 
-    }
-
-    .cart-item-title {
-      font-weight: 700; 
-      font-size: 0.95rem;
-      color: var(--text);
-      line-height: 1.2;
-    }
-
-    .cart-item-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .cart-item-badge {
-      display: flex;
-      align-items: center;
-      font-size: 0.8rem;
-      color: #0e3f3f;
-      background: rgba(24, 220, 216, 0.1);
-      border: 1px solid rgba(24, 220, 216, 0.25);
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-weight: 600;
-      gap: 6px;
-    }
-
-    .quantity-control {
-      display: flex;
-      align-items: center;
-      background: #f8fbfb;
-      border: 1px solid rgba(24, 220, 216, 0.3);
-      border-radius: 6px;
-      overflow: hidden;
-      height: 26px;
-    }
-
-    .qty-btn {
-      background: transparent;
-      border: none;
-      color: var(--primary-700);
-      cursor: pointer;
-      width: 26px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .qty-btn:hover {
-      background: rgba(24, 220, 216, 0.2);
-    }
-
-    .qty-val {
-      font-weight: 700;
-      font-size: 0.85rem;
-      min-width: 20px;
-      text-align: center;
-      color: #0e3f3f;
-      border-left: 1px solid rgba(24, 220, 216, 0.15);
-      border-right: 1px solid rgba(24, 220, 216, 0.15);
-      padding: 0 4px;
-      line-height: 26px;
-    }
-
-    .cart-item-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .cart-item-price {
-      color: #6b7b80; 
-      font-weight: 500;
-      font-size: 0.9rem;
-      white-space: nowrap; 
-    }
-
-    .delete-btn {
-      color: #ff4d4f;
-      background: rgba(255, 77, 79, 0.08);
-      border: none;
-      cursor: pointer;
-      font-size: 0.85rem; 
-      padding: 6px 8px; 
-      border-radius: 6px;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .delete-btn:hover {
-      background: #ff4d4f;
-      color: #fff;
-    }
-
-    .cart-totals {
-      padding: 16px 18px;
-      background: #fcfcfc;
-      border-top: 1px solid rgba(0,0,0,.05);
-    }
-
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      font-weight: 500; 
-      color: #6b7b80; 
-    }
-
-    .total-row.grand-total {
-      font-weight: 800;
-      font-size: 1.15rem;
-      border-top: 2px dashed rgba(24,220,216,.3);
-      padding-top: 12px;
-      margin-top: 8px;
-      color: #0e3f3f;
-    }
-
-    .add-more-btn {
-      background: rgba(24, 220, 216, 0.05);
-      color: var(--primary-700);
-      border: 1.5px dashed var(--primary);
-      margin-top: 20px;
-      margin-bottom: -5px;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-    }
-
-    .add-more-btn:hover {
-      background: rgba(24, 220, 216, 0.15);
-      border-style: solid;
-      border-color: var(--primary-700);
-      box-shadow: 0 6px 15px rgba(24, 220, 216, 0.15);
-      transform: translateY(-2px);
-    }
-
-    .add-more-btn i {
-      transition: transform 0.4s ease;
-    }
-
-    .add-more-btn:hover i {
-      transform: rotate(90deg);
-    }
-
-    .section-divider {
-      width: 100%;
-      max-width: 480px;
-      margin: 30px auto 20px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--primary), transparent);
-      position: relative;
-      cursor: pointer;
-    }
-
-    .scroll-arrows {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #ffffff;
-      padding: 6px 4px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .arrow-up {
-      width: 12px;
-      height: 12px;
-      border: solid var(--primary);
-      border-width: 2px 0 0 2px;
-      border-radius: 2px;
-      transform: rotate(45deg);
-    }
-
-    .top-arrow {
-      margin-bottom: -5px;
-      animation: bounce-up 1.5s infinite ease-in-out;
-    }
-
-    @keyframes bounce-up {
-      0%, 100% { transform: translateY(0) rotate(45deg); opacity: 1; }
-      50% { transform: translateY(-4px) rotate(45deg); opacity: 0.5; }
-    }
-
-    .notes{
-      width:100%;
-      max-width:480px;
-      margin:0 auto 24px;
-      padding:0 18px;
-    }
-
-    .info-note{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:12px;
-      background:rgba(24,220,216,.05);
-      border:1px solid rgba(24,220,216,.12);
-    }
-
-    .info-note-icon{
-      width:20px;
-      min-width:20px;
-      text-align:center;
-      color:rgba(24,220,216,.85);
-      font-size:.82rem;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .info-note-text{
-      margin:0;
-      font-size:.72rem;
-      line-height:1.7;
-      color:#6b7b80;
-    }
-
-    .info-note-text .note-title{
-      font-weight:700;
-      color:#4f666a;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="wrap">
-
-  <header class="site-head" id="header">
-    <div class="logo">
-      <img src="https://cdn.imgpile.com/f/nQ5XZuf_xl.png" alt="Logo">
-    </div>
-  </header>
-
-  <section class="card">
-    <div class="card-head">
-      <h1 class="card-title">يرجى إدخال المعلومات التالية</h1>
-      <p class="card-sub">حدد الشكل وأدخل القياسات لتحصل على السعر فوراً</p>
-    </div>
-
-    <div class="title-divider">
-      <span class="arrow-down"></span>
-    </div>
-
-    <form class="content" novalidate>
-      <div class="grid">
-        <div class="field">
-          <label>الشكل</label>
-          <div class="select-wrap">
-            <select id="shape">
-              <option value="مستطيل">مستطيل</option>
-              <option value="مربع">مربع</option>
-              <option value="دائري">دائري</option>
-            </select>
-            <i class="fa-solid fa-chevron-down select-icon"></i>
-          </div>
-        </div>
-
-        <div class="field" id="heightGroup">
-          <label id="labelHeight">الطول (سم)</label>
-          <input type="text" inputmode="numeric" class="num-input" id="height" placeholder="ادخل الطول بالسنتيمتر" />
-        </div>
-
-        <div class="field" id="widthGroup">
-          <label>العرض (سم)</label>
-          <input type="text" inputmode="numeric" class="num-input" id="width" placeholder="ادخل العرض بالسنتيمتر" />
-        </div>
-      </div>
-
-      <button type="button" id="calcBtn">احسب</button>
-      
-      <button type="button" class="order-button add-to-cart-btn" id="addToCartAction" style="display: none;">
-        أضف إلى السلة <i class="fa-solid fa-cart-plus"></i>
-      </button>
-
-      <div id="result" title="اضغط لنسخ تفاصيل السعر"></div>
-    </form>
-  </section>
-
-  <section class="card cart-card" id="cartContainer" style="display:none;" title="اضغط لنسخ تفاصيل الطلب">
-    <div class="cart-header">
-      <h2 class="card-title" style="font-size: 1.15rem; color: var(--primary-700);">
-        سلة المشتريات <i class="fa-solid fa-cart-plus" style="margin-right: 5px;"></i>
-      </h2>
-    </div>
-    
-    <div id="cartItemsList"></div>
-    
-    <div class="cart-totals">
-      <div class="total-row">
-        <span>المجموع:</span>
-        <span><span id="cartSubtotal">0</span> د.ع</span>
-      </div>
-      <div class="total-row">
-        <span>خدمة التوصيل:</span>
-        <span><span id="cartDelivery">5,000</span> د.ع</span>
-      </div>
-      <div class="total-row grand-total">
-        <span>السعر الكلي:</span>
-        <span><span id="cartTotal">0</span> د.ع</span>
-      </div>
-      
-      <button type="button" class="order-button add-more-btn" id="addMoreBtn">
-        إضافة قياس آخر <i class="fa-solid fa-plus-circle" style="margin-right: 8px;"></i>
-      </button>
-
-      <a class="order-button checkout-btn" id="checkoutBtn" href="#" target="_blank" style="margin-top: 15px;">
-        إرسال الطلب عبر واتساب <i class="fa-brands fa-whatsapp" style="margin-right:8px; font-size:1.2rem;"></i>
-      </a>
-    </div>
-  </section>
-
-  <div class="section-divider" id="scrollTopAction" title="العودة للأعلى">
-    <div class="scroll-arrows">
-      <span class="arrow-up top-arrow"></span>
-      <span class="arrow-up bottom-arrow"></span>
-    </div>
-  </div>
-
-  <div class="notes">
-    <div class="info-note">
-      <div class="info-note-icon">
-        <i class="fa-solid fa-maximize"></i>
-      </div>
-      <p class="info-note-text">
-        <span class="note-title">زيادة بالطول:</span>
-        يُضاف هامش 3 سم إلى قياس الطول.
-      </p>
-    </div>
-  </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const RATE_UP_TO_100 = 13500;
-  const RATE_100_TO_120 = 16200;
-  const RATE_120_TO_150 = 20250;
-  const EXTRA_CM_FOR_PRICING = 3;
-  const DELIVERY_FEE = 5000;
-  const WA_NUMBER = "9647724522333";
-
-  const MAX_H_CM = 2000;
-  const MAX_W_CM = 200;
-
-  let cart = []; 
-  let tempItem = null; 
-
-  const shapeEl  = document.getElementById("shape");
-  const heightEl = document.getElementById("height");
-  const widthEl  = document.getElementById("width");
-  const widthGrp = document.getElementById("widthGroup");
-  const labelHeight = document.getElementById("labelHeight");
-  const resultBox = document.getElementById("result");
-  const calcBtn = document.getElementById("calcBtn");
-  const addToCartBtn = document.getElementById("addToCartAction"); 
-  const cartContainer = document.getElementById("cartContainer");
-  const scrollTopAction = document.getElementById("scrollTopAction");
-  const addMoreBtn = document.getElementById("addMoreBtn");
-
-  scrollTopAction.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  function trackButtonEvent(labelText) {
-    if (typeof gtag !== "function") return;
-    gtag("event", "button_click", {
-      event_category: "button",
-      event_label: labelText,
-      button_text: labelText,
-      value: 1
-    });
-  }
-
-  function clean(el){
-    el.addEventListener("input",()=>{
-      let val = el.value.replace(/[٠١٢٣٤٥٦٧٨٩]/g, function(d) {
-        return d.charCodeAt(0) - 1632; 
-      });
-      val = val.replace(/[^0-9]/g, "");
-      if(val !== "" && Number(val) < 1) val = "1";
-      el.value = val;
-    });
-  }
-
-  clean(heightEl);
-  clean(widthEl);
-
-  function updateFields(){
-    const shape = shapeEl.value;
-    resultBox.classList.remove("show");
-    addToCartBtn.style.display = "none"; 
-    resultBox.innerHTML = "";
-    resultBox.dataset.copyText = "";
-    tempItem = null;
-
-    if(shape === "مستطيل"){
-      widthGrp.style.display = "";
-      labelHeight.textContent = "الطول (سم)";
-      heightEl.placeholder = "ادخل الطول بالسنتيمتر";
-      widthEl.placeholder  = "ادخل العرض بالسنتيمتر";
-    }else{
-      widthGrp.style.display = "none";
-      widthEl.value = "";
-
-      if(shape === "مربع"){
-        labelHeight.textContent = "طول الضلع (سم)";
-        heightEl.placeholder = "ادخل طول الضلع بالسنتيمتر";
-      }else if(shape === "دائري"){
-        labelHeight.textContent = "قطر الدائرة (سم)";
-        heightEl.placeholder = "ادخل قطر الدائرة بالسنتيمتر";
-      }
-    }
-  }
-
-  shapeEl.addEventListener("change", updateFields);
-
-  function computeArea(shape,h,w){
-    const hM = h/100;
-    if(shape==="مستطيل") return hM*(w/100);
-    if(shape==="مربع") return hM*hM;
-    if(shape==="دائري") return Math.PI*(hM/2)**2;
-    return 0;
-  }
-
-  function getLinearRateByWidth(widthCm){
-    if(widthCm <= 100) return RATE_UP_TO_100;
-    if(widthCm <= 120) return RATE_100_TO_120;
-    if(widthCm <= 150) return RATE_120_TO_150;
-    return null;
-  }
-
-  function computePrice(shape,h,w){
-    let effectiveWidth = w;
-    let effectiveLength = h + EXTRA_CM_FOR_PRICING;
-
-    if(shape === "مربع"){
-      effectiveWidth = h;
-    }
-    if(shape === "دائري"){
-      effectiveWidth = h;
-      effectiveLength = h;
-    }
-
-    const selectedRate = getLinearRateByWidth(effectiveWidth);
-    if(selectedRate === null) return null;
-
-    return (effectiveLength / 100) * selectedRate;
-  }
-
-  function roundPriceToNearest500(price){
-    const base = Math.floor(price / 1000) * 1000;
-    const remainder = price - base;
-
-    if (remainder <= 249) return base;
-    if (remainder <= 749) return base + 500;
-    return base + 1000;
-  }
-
-  function fmt(n){
-    return roundPriceToNearest500(n).toLocaleString("en-US");
-  }
-
-  function toArabicDigits(value){
-    return String(value).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
-  }
-
-  function formatPriceTextForCopy(price){
-    const rounded = roundPriceToNearest500(price);
-    const thousands = Math.floor(rounded / 1000);
-    const remainder = rounded % 1000;
-
-    if (rounded < 1000) return `${toArabicDigits(rounded)} د.ع`;
-    if (remainder === 0) return `${toArabicDigits(thousands)} الف د.ع`;
-    if (remainder === 500) return `${toArabicDigits(thousands)} الف ونصف د.ع`;
-    return `${toArabicDigits(rounded)} د.ع`;
-  }
-
-  function formatWeightTextForCopy(weight){
-    const roundedToHalf = Math.round(weight * 2) / 2;
-    const whole = Math.floor(roundedToHalf);
-    const fraction = roundedToHalf - whole;
-
-    if (roundedToHalf === 0.5) return "نصف كيلوغرام";
-    if (fraction === 0) return `${toArabicDigits(whole)} كيلوغرام`;
-    if (fraction === 0.5) return `${toArabicDigits(whole)} كيلوغرام ونصف`;
-    return `${toArabicDigits(roundedToHalf)} كيلوغرام`;
-  }
-
-  async function copyTextToClipboard(text){
-    try{
-      await navigator.clipboard.writeText(text);
-    }catch(err){
-      const textarea = document.createElement("textarea");
-      textarea.value = text;
-      textarea.setAttribute("readonly", "");
-      textarea.style.position = "fixed";
-      textarea.style.opacity = "0";
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-    }
-  }
-
-  resultBox.addEventListener("click", async (e) => {
-    if(!resultBox.classList.contains("show")) return;
-    const copyText = resultBox.dataset.copyText || "";
-    if(!copyText) return;
-    await copyTextToClipboard(copyText);
-  });
-
-  cartContainer.addEventListener("click", async (e) => {
-    if(e.target.closest(".delete-btn") || e.target.closest(".checkout-btn") || e.target.closest(".add-more-btn") || e.target.closest(".qty-btn")) return;
-    const copyText = cartContainer.dataset.copyText || "";
-    if(!copyText) return;
-    await copyTextToClipboard(copyText);
-  });
-
-  addToCartBtn.addEventListener("click", () => {
-    trackButtonEvent("أضف إلى السلة");
-    if(tempItem) {
-      const existingItemIndex = cart.findIndex(item => item.shape === tempItem.shape && item.dimsText === tempItem.dimsText);
-      
-      if (existingItemIndex > -1) {
-        cart[existingItemIndex].quantity += 1;
-      } else {
-        cart.push(tempItem);
-      }
-      
-      tempItem = null;
-      updateCartUI();
-      
-      resultBox.classList.remove("show");
-      addToCartBtn.style.display = "none";
-      heightEl.value = "";
-      widthEl.value = "";
-      
-      cartContainer.scrollIntoView({ behavior: "smooth" });
-    }
-  });
-
-  calcBtn.addEventListener("click", ()=>{
-    const shape = shapeEl.value;
-    const h = Number(heightEl.value);
-    const w = Number(widthEl.value);
-
-    if (shape === "مستطيل" && w > h) {
-      alert("⚠️ لا يمكن أن يكون العرض أكبر من الطول.");
-      widthEl.value = "";
-      widthEl.focus();
-      return;
-    }
-
-    if(!h || h<=0 || (shape==="مستطيل" && (!w || w<=0))){
-      alert("يرجى إدخال قيم صحيحة.");
-      return;
-    }
-
-    if(h > MAX_H_CM){
-      alert("أقصى طول هو 20 متر (2000 سم).");
-      return;
-    }
-
-    if(shape==="مستطيل" && w > MAX_W_CM){
-      alert("أقصى عرض هو 2 متر (200 سم).");
-      return;
-    }
-
-    trackButtonEvent("احسب");
-
-    const basePrice = computePrice(shape,h,w);
-
-    if(basePrice === null){
-      alert("هذا العرض يحتاج تسعير إضافي حتى 1.5 متر.");
-      return;
-    }
-
-    const price = roundPriceToNearest500(basePrice);
-    const area = computeArea(shape,h,w);
-    const weight = (area * 0.0025 * 1250).toFixed(3);
-
-    let dimsText;
-    let dimsCopyText;
-    if(shape === "مستطيل"){
-      dimsText = `${h} × ${w}`;
-      dimsCopyText = `${w}*${h}`;
-    }else if(shape === "مربع"){
-      dimsText = `${h} × ${h}`;
-      dimsCopyText = `${h}*${h}`;
-    }else{
-      dimsText = `${h}`;
-      dimsCopyText = `${h}`;
-    }
-
-    tempItem = {
-      shape: shape,
-      dimsText: dimsText,
-      price: price,
-      weight: weight,
-      quantity: 1 
-    };
-
-    resultBox.innerHTML = `
-      <div class="row">
-        <div class="row-main">
-          <i class="fa-solid fa-money-bill-wave"></i>
-          <div class="label-wrap">
-            <div class="label">السعر</div>
-          </div>
-        </div>
-        <div class="value">
-          <span class="num">${fmt(price)}</span>
-          <span class="unit">د.ع</span>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="row-main">
-          <i class="fa-solid fa-ruler"></i>
-          <div class="label-wrap">
-            <div class="label">القياس</div>
-          </div>
-        </div>
-        <div class="value">
-          <span class="num" dir="ltr">${dimsText}</span>
-          <span class="unit">سم</span>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="row-main">
-          <i class="fa-solid fa-weight-hanging"></i>
-          <div class="label-wrap">
-            <div class="label">الوزن</div>
-          </div>
-        </div>
-        <div class="value">
-          <span class="num">${weight}</span>
-          <span class="unit">كغم</span>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="row-main">
-          <i class="fa-solid fa-layer-group"></i>
-          <div class="label-wrap">
-            <div class="label">السُمك</div>
-          </div>
-        </div>
-        <div class="value">
-          <span class="num">2.5</span>
-          <span class="unit">ملم</span>
-        </div>
-      </div>
-    `;
-
-    const priceWithDelivery = price + DELIVERY_FEE;
-    resultBox.dataset.copyText = `السعر مع التوصيل: ${formatPriceTextForCopy(priceWithDelivery)}\nالوزن للقياس ${dimsCopyText} = ${formatWeightTextForCopy(Number(weight))}`;
-
-    resultBox.classList.add("show");
-    addToCartBtn.style.display = "flex";
-  });
-
-  function updateCartUI() {
-    const cartItemsDiv = document.getElementById("cartItemsList");
-    const cartSubtotalEl = document.getElementById("cartSubtotal");
-    const cartTotalEl = document.getElementById("cartTotal");
-    const checkoutBtn = document.getElementById("checkoutBtn");
-
-    if(cart.length === 0) {
-      cartContainer.style.display = "none";
-      return;
-    }
-
-    cartContainer.style.display = "block";
-    cartItemsDiv.innerHTML = "";
-
-    let subtotal = 0;
-
-    cart.forEach((item, index) => {
-      subtotal += (item.price * item.quantity);
-
-      let shapeTitleText = "";
-      if (item.shape === "مستطيل") shapeTitleText = "غطاء مستطيل";
-      else if (item.shape === "مربع") shapeTitleText = "غطاء مربع";
-      else if (item.shape === "دائري") shapeTitleText = "غطاء دائري";
-
-      const itemDiv = document.createElement("div");
-      itemDiv.className = "cart-item";
-      
-      itemDiv.innerHTML = `
-        <div class="cart-item-right">
-          <span class="cart-item-title">${index + 1}. ${shapeTitleText}</span>
-          <div class="cart-item-meta">
-            <div class="cart-item-badge">
-              <span>القياس:</span>
-              <span dir="ltr" style="display:inline-block">${item.dimsText}</span>
-              <span>سم</span>
-            </div>
-            <div class="quantity-control">
-              <button type="button" class="qty-btn plus-btn" title="زيادة الكمية"><i class="fa-solid fa-plus" style="font-size:0.75rem;"></i></button>
-              <span class="qty-val">${item.quantity}</span>
-              <button type="button" class="qty-btn minus-btn" title="تقليل الكمية"><i class="fa-solid fa-minus" style="font-size:0.75rem;"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="cart-item-left">
-          <span class="cart-item-price">${fmt(item.price * item.quantity)} د.ع</span>
-          <button class="delete-btn" title="حذف العنصر"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
-      `;
-
-      const plusBtn = itemDiv.querySelector(".plus-btn");
-      plusBtn.onclick = (e) => {
-        e.stopPropagation();
-        cart[index].quantity += 1;
-        updateCartUI();
-      };
-
-      const minusBtn = itemDiv.querySelector(".minus-btn");
-      minusBtn.onclick = (e) => {
-        e.stopPropagation();
-        if (cart[index].quantity > 1) {
-          cart[index].quantity -= 1;
-          updateCartUI();
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolls Pricing System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+ 
+        :root {
+            --primary: #18dcd8;
+            --primary-dark: #15b8b4;
+            --bg: #f3f4f6;
+            --surface: #ffffff;
+            --text: #1f2937;
+            --border: #e5e7eb;
         }
-      };
-
-      const deleteBtn = itemDiv.querySelector(".delete-btn");
-      deleteBtn.onclick = (e) => {
-        e.stopPropagation();
-        cart.splice(index, 1);
-        updateCartUI();
-      };
-
-      cartItemsDiv.appendChild(itemDiv);
-    });
-
-    const grandTotal = subtotal + DELIVERY_FEE;
-    
-    cartSubtotalEl.textContent = fmt(subtotal);
-    cartTotalEl.textContent = fmt(grandTotal);
-
-    let msg = "🧾 تفاصيل الطلب:\n\n";
-    cart.forEach((item, index) => {
-      let shapeTitleText = "";
-      if (item.shape === "مستطيل") shapeTitleText = "غطاء مستطيل";
-      else if (item.shape === "مربع") shapeTitleText = "غطاء مربع";
-      else if (item.shape === "دائري") shapeTitleText = "غطاء دائري";
-
-      msg += `${index + 1}. ${shapeTitleText} (الكمية: ${item.quantity})\n`;
-      msg += `القياس: ${item.dimsText.replace(' × ', '*')} سم\n`;
-      msg += `السعر: ${fmt(item.price * item.quantity)} د.ع\n\n`;
-    });
-    
-    msg += `﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏\n`;
-    msg += `المجموع: ${fmt(subtotal)} د.ع\n`;
-    msg += `خدمة التوصيل: ${fmt(DELIVERY_FEE)} د.ع\n`;
-    msg += `السعر الكلي: ${fmt(grandTotal)} د.ع`;
-
-    cartContainer.dataset.copyText = msg;
-
-    checkoutBtn.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-    checkoutBtn.onclick = () => {
-      trackButtonEvent("إرسال الطلب عبر واتساب");
+ 
+        * { box-sizing: border-box; }
+ 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+ 
+        .container {
+            background: var(--surface);
+            width: 100%;
+            max-width: 1250px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            padding: 36px;
+        }
+ 
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 22px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+ 
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+ 
+        .header h1::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 28px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+ 
+        .settings-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+ 
+        .settings-card {
+            background: var(--bg);
+            padding: 9px 16px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s;
+        }
+ 
+        .settings-card:focus-within {
+            border-color: var(--primary);
+        }
+ 
+        .settings-card label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6b7280;
+            white-space: nowrap;
+        }
+ 
+        .settings-card input {
+            width: 75px;
+            padding: 7px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-weight: 700;
+            text-align: center;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+ 
+        .settings-card input:focus { border-color: var(--primary); }
+ 
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 22px;
+        }
+ 
+        .ui-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 780px;
+        }
+ 
+        .ui-table th {
+            text-align: left;
+            padding: 13px 12px;
+            color: #6b7280;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: #f9fafb;
+            border-bottom: 1px solid var(--border);
+        }
+ 
+        .ui-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+ 
+        .ui-table tbody tr:last-child td { border-bottom: none; }
+        .ui-table tbody tr:hover { background: #fafafa; }
+ 
+        .ui-table input, .ui-table select {
+            width: 100%;
+            padding: 9px 10px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            box-sizing: border-box;
+            font-family: inherit;
+            outline: none;
+            background-color: #fff;
+            font-size: 0.92rem;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+ 
+        .ui-table input:focus, .ui-table select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(24, 220, 216, 0.15);
+        }
+ 
+        .ui-table .short-input { width: 85px; }
+ 
+        .btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.92rem;
+            transition: background 0.2s, transform 0.1s;
+        }
+ 
+        .btn:hover { background: var(--primary-dark); }
+        .btn:active { transform: translateY(1px); }
+ 
+        .actions-cell {
+            display: flex;
+            gap: 5px;
+            justify-content: flex-end;
+            align-items: center;
+        }
+ 
+        .btn-action {
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            padding: 7px 9px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.15s;
+        }
+ 
+        .btn-move { background: #eef0f2; color: #374151; }
+        .btn-move:hover { background: #d1d5db; }
+        .btn-delete { background: #fee2e2; color: #ef4444; font-weight: bold; }
+        .btn-delete:hover { background: #fca5a5; }
+ 
+        .btn-pdf { background: #374151; margin-left: 10px; }
+        .btn-pdf:hover { background: #1f2937; }
+        .btn-pdf-simple { background: #6b7280; margin-left: 10px; }
+        .btn-pdf-simple:hover { background: #4b5563; }
+ 
+        .bottom-sections {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 32px;
+            border-top: 1px dashed var(--border);
+            padding-top: 32px;
+        }
+ 
+        .buttons-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+ 
+        .totals-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+            min-width: 300px;
+        }
+ 
+        .total-box {
+            background: var(--bg);
+            padding: 15px 22px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #4b5563;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: right;
+        }
+ 
+        .total-box span.main-val {
+            color: var(--text);
+            font-weight: 700;
+            font-size: 1.35rem;
+            margin-left: 10px;
+        }
+ 
+        .grand-total {
+            background-color: #f0fdfa;
+            border-color: #ccfbf1;
+        }
+ 
+        .grand-total span.main-val {
+            color: var(--primary-dark);
+            font-size: 1.55rem;
+        }
+ 
+        .iqd-text {
+            display: block;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #99f6e4;
+            background: linear-gradient(135deg, #0d9488 0%, #064e3b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            direction: ltr;
+        }
+ 
+        /* --- قسم ملخص التكلفة الذكي --- */
+        .payments-panel {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 26px;
+            width: 100%;
+            max-width: 500px;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.06);
+            direction: rtl;
+        }
+ 
+        .payments-panel h3 {
+            margin: 0 0 18px 0;
+            color: #1f2937;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+ 
+        .payment-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 0;
+            border-bottom: 1px dashed #e5e7eb;
+            font-size: 1rem;
+            color: #4b5563;
+        }
+ 
+        .payment-row:last-of-type {
+            border-bottom: none;
+        }
+ 
+        .payment-row.commissions-total {
+            background: #f0fdfa;
+            border: 1px solid #ccfbf1;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-top: 4px;
+            font-weight: 700;
+        }
+ 
+        .payment-row.commissions-total span:first-child {
+            color: #0f766e;
+        }
+ 
+        .payment-row.total-all {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+        }
+ 
+        .val-usd { font-family: 'Inter', sans-serif; font-weight: 700; direction: ltr; display: inline-block; }
+        .val-iqd { color: #059669; font-size: 0.95rem; font-weight: 700; margin-right: 12px; }
+ 
+        .payment-row.total-all .val-iqd { color: #a7f3d0; font-size: 1.15rem;}
+        .payment-row.commissions-total .val-iqd { color: #0d9488; }
+ 
+        .inline-input {
+            width: 62px;
+            padding: 5px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            font-size: 0.95rem;
+            outline: none;
+            margin: 0 5px;
+            direction: ltr;
+        }
+ 
+        .inline-input:focus { border-color: var(--primary); }
+ 
+        #print-area { display: none; }
+ 
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            @page { size: A4 portrait; margin: 15mm; }
+            body { background-color: #fff; margin: 0; padding: 0; }
+            .container { display: none !important; }
+            #print-area { display: block !important; width: 100%; }
+ 
+            .pdf-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-family: 'Calibri', 'Inter', sans-serif;
+                font-size: 13pt;
+                margin-bottom: 20px;
+            }
+            .pdf-table th, .pdf-table td { border: 1pt solid #9cc2e5 !important; padding: 8px 10px; color: #000 !important; }
+            .pdf-table thead th { background-color: #5b9bd5 !important; color: #ffffff !important; font-weight: bold; }
+            .pdf-table tbody tr:nth-child(even) { background-color: #ddebf7 !important; }
+            .pdf-table tbody tr:nth-child(odd) { background-color: #ffffff !important; }
+            .pdf-table tfoot th, .pdf-table tfoot td { background-color: #404040 !important; color: #ffffff !important; font-weight: bold; border: 1pt solid #404040 !important; }
+ 
+            .pdf-table tfoot .iqd-print-row td { background-color: #f0fdfa !important; color: #0f766e !important; border: 1pt solid #0f766e !important; font-family: 'Cairo', 'Inter', sans-serif; font-size: 14pt; font-weight: bold; }
+ 
+            .pdf-payments-table {
+                width: 75%;
+                margin: 30px auto 0 auto;
+                border-collapse: collapse;
+                font-family: 'Cairo', 'Inter', sans-serif;
+                font-size: 13pt;
+                direction: rtl;
+            }
+            .pdf-payments-table th { background-color: #0f766e !important; color: #ffffff !important; padding: 10px; text-align: center; border: 1pt solid #0f766e; font-size: 15pt; }
+            .pdf-payments-table td { padding: 10px 15px; border: 1pt solid #cbd5e1; }
+            .pdf-payments-table td:first-child { font-weight: bold; background-color: #f8fafc; width: 45%; }
+            .pdf-payments-table td:nth-child(2) { direction: ltr; text-align: left; font-family: 'Inter', sans-serif; width: 25%; font-weight: bold;}
+            .pdf-payments-table td:last-child { direction: rtl; text-align: right; color: #059669; width: 30%; font-weight: bold;}
+ 
+            .pdf-payments-table tr.commissions-total-print td { background-color: #f0fdfa !important; color: #0f766e !important; }
+            .pdf-payments-table tr.commissions-total-print td:last-child { color: #0d9488 !important; }
+ 
+            .pdf-payments-table tr.total-all-print td { background-color: #1f2937 !important; color: #ffffff !important; font-weight: bold; font-size: 14pt; }
+            .pdf-payments-table tr.total-all-print td:last-child { color: #a7f3d0 !important; }
+        }
+    </style>
+</head>
+<body>
+ 
+<div class="container">
+    <div class="header">
+        <h1>Rolls Pricing & Management</h1>
+        <div class="settings-container">
+            <div class="settings-card">
+                <label>2.5mm Price/Sqm</label>
+                <input type="number" id="price-25" value="3.85" step="0.01" oninput="calculateAll()">
+            </div>
+            <div class="settings-card">
+                <label>1.5mm Price/Sqm</label>
+                <input type="number" id="price-15" value="2.50" step="0.01" oninput="calculateAll()">
+            </div>
+        </div>
+    </div>
+ 
+    <div class="table-wrap">
+        <table class="ui-table">
+            <thead>
+                <tr>
+                    <th>Width (cm)</th>
+                    <th>Length (m)</th>
+                    <th>Thickness (mm)</th>
+                    <th>Qty</th>
+                    <th>Note (Optional)</th>
+                    <th style="text-align: right;">Unit Price</th>
+                    <th style="text-align: right;">Line Total</th>
+                    <th style="text-align: right; width: 100px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <tr>
+                    <td><input type="number" class="w-val short-input" value="40" step="1" oninput="calculateAll()"></td>
+                    <td><input type="number" class="l-val short-input" value="20" step="1" oninput="calculateAll()"></td>
+                    <td>
+                        <select class="t-val short-input" onchange="calculateAll()">
+                            <option value="2.5" selected>2.5</option>
+                            <option value="1.5">1.5</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="q-val short-input" value="2" step="1" oninput="calculateAll()"></td>
+                    <td><input type="text" class="n-val" placeholder="e.g. Other type" oninput="calculateAll()"></td>
+                    <td style="text-align: right; font-weight: 600;" class="u-price">$0.00</td>
+                    <td style="text-align: right; font-weight: 600;" class="l-total">$0.00</td>
+                    <td>
+                        <div class="actions-cell">
+                            <button class="btn-action btn-move" onclick="moveUp(this)" title="Move Up">⬆️</button>
+                            <button class="btn-action btn-move" onclick="moveDown(this)" title="Move Down">⬇️</button>
+                            <button class="btn-action btn-delete" onclick="deleteRow(this)" title="Delete">X</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ 
+    <div class="buttons-group" style="margin-bottom: 20px;">
+        <button class="btn" onclick="addRow()">+ Add Row</button>
+        <button class="btn btn-pdf" onclick="generatePDF('full')">📄 Print Full (with prices)</button>
+        <button class="btn btn-pdf-simple" onclick="generatePDF('simple')">📄 Print Simple (no prices)</button>
+    </div>
+ 
+    <div class="bottom-sections">
+ 
+        <!-- قسم ملخص التكلفة الذكي -->
+        <div class="payments-panel">
+            <h3>التكلفة النهائية الشاملة (مع العمولات)</h3>
+ 
+            <div class="payment-row">
+                <span>حد الدفعة الواحدة للاستقطاع:</span>
+                <div>
+                    <span class="val-usd">$</span><input type="number" id="inp-pmt-limit" class="inline-input" value="349" step="1" oninput="calculatePayments()">
+                </div>
+            </div>
+ 
+            <div class="payment-row">
+                <span>عدد الدفعات المتوقعة:</span>
+                <div style="text-align: left;">
+                    <span style="font-weight: 800; color: #0f766e; font-size: 1.15rem;" id="lbl-pmt-count">0</span> <span style="font-weight: bold;">دفعات</span><br>
+                    <span style="font-size: 0.82rem; color: #6b7280; direction: rtl; display: block;" id="lbl-pmt-details"></span>
+                </div>
+            </div>
+ 
+            <div class="payment-row">
+                <span>إجمالي عمولات علي بابا (<input type="number" id="inp-ali-perc" class="inline-input" style="width:58px;" value="2.99" step="0.01" oninput="calculatePayments()">%):</span>
+                <div>
+                    <span class="val-iqd" id="lbl-ali-total-iqd">0 د.ع</span>
+                    <span class="val-usd" id="lbl-ali-total-usd">$0.00</span>
+                </div>
+            </div>
+ 
+            <div class="payment-row">
+                <span>إجمالي عمولات البطاقة البنكية (<input type="number" id="inp-bank-perc" class="inline-input" style="width:58px;" value="2.5" step="0.1" oninput="calculatePayments()">%):</span>
+                <div>
+                    <span class="val-iqd" id="lbl-bank-total-iqd">0 د.ع</span>
+                    <span class="val-usd" id="lbl-bank-total-usd">$0.00</span>
+                </div>
+            </div>
+ 
+            <div class="payment-row commissions-total">
+                <span>مجموع العمولات (علي بابا + البنك):</span>
+                <div>
+                    <span class="val-iqd" id="lbl-commissions-total-iqd">0 د.ع</span>
+                    <span class="val-usd" id="lbl-commissions-total-usd" style="color: #0f766e;">$0.00</span>
+                </div>
+            </div>
+ 
+            <div class="payment-row total-all" style="flex-direction: column; align-items: flex-start; gap: 15px;">
+                <span style="border-bottom: 1px solid #4b5563; width: 100%; padding-bottom: 8px; font-size: 1.15rem;">المبلغ النهائي الكلي الشامل (ما سيتم دفعه):</span>
+                <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                    <span class="val-iqd" id="lbl-final-total-iqd" style="font-size: 1.2rem;">0 د.ع</span>
+                    <span class="val-usd" id="lbl-final-total-usd" style="font-size: 1.7rem; color: #10b981;">$0.00</span>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- قسم الإجمالي الكلي للرولات (بدون عمولات) -->
+        <div class="totals-container">
+            <div class="total-box">
+                Total Rolls: <span id="total-qty-val" class="main-val">0</span>
+            </div>
+            <div class="total-box grand-total">
+                <div>Total Price (Rolls Only): <span id="grand-total-val" class="main-val">$0.00</span></div>
+                <div id="grand-total-iqd" class="iqd-text">≈ 0 د.ع</div>
+            </div>
+        </div>
+ 
+    </div>
+</div>
+ 
+<div id="print-area"></div>
+ 
+<script>
+    let globalGrandTotal = 0;
+    let globalTotalQty = 0;
+    const EXCHANGE_RATE = 1320;
+ 
+    // تخزين البيانات للطباعة
+    let printData = {
+        gtRolls: 0,
+        aliPerc: 0, aliTotal: 0,
+        bankPerc: 0, bankTotal: 0,
+        commissionsTotal: 0,
+        finalTotal: 0,
+        numPayments: 0, pmtDetails: ""
     };
-  }
-
-  addMoreBtn.addEventListener("click", () => {
-    trackButtonEvent("إضافة قياس آخر");
-    
-    document.querySelector(".card").scrollIntoView({ behavior: "smooth" });
-    
-    heightEl.value = "";
-    widthEl.value = "";
-    resultBox.classList.remove("show");
-    addToCartBtn.style.display = "none";
-    
-    setTimeout(() => {
-      heightEl.focus();
-    }, 600);
-  });
-
-  updateFields();
-});
+ 
+    const formatMoney = (amount) => amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const formatMoneyD = (amount) => amount.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 });
+ 
+    function calculateAll() {
+        const price25 = parseFloat(document.getElementById('price-25').value) || 0;
+        const price15 = parseFloat(document.getElementById('price-15').value) || 0;
+        const rows = document.querySelectorAll('#table-body tr');
+ 
+        globalGrandTotal = 0;
+        globalTotalQty = 0;
+ 
+        rows.forEach(row => {
+            const w = parseFloat(row.querySelector('.w-val').value) || 0;
+            const l = parseFloat(row.querySelector('.l-val').value) || 0;
+            const t = parseFloat(row.querySelector('.t-val').value) || 2.5;
+            const q = parseInt(row.querySelector('.q-val').value) || 0;
+ 
+            const sqmPrice = (t === 1.5) ? price15 : price25;
+            const area = (w / 100) * l;
+            const unitPrice = area * sqmPrice;
+            const lineTotal = unitPrice * q;
+ 
+            row.dataset.unitPrice = unitPrice;
+            row.dataset.lineTotal = lineTotal;
+ 
+            row.querySelector('.u-price').innerText = formatMoneyD(unitPrice);
+            row.querySelector('.l-total').innerText = formatMoneyD(lineTotal);
+ 
+            globalGrandTotal += lineTotal;
+            globalTotalQty += q;
+        });
+ 
+        document.getElementById('grand-total-val').innerText = formatMoneyD(globalGrandTotal);
+        document.getElementById('total-qty-val').innerText = globalTotalQty;
+ 
+        const totalIQD = globalGrandTotal * EXCHANGE_RATE;
+        document.getElementById('grand-total-iqd').innerHTML = `≈ <span style="font-family: 'Inter', sans-serif;">${totalIQD.toLocaleString('en-US')}</span> د.ع`;
+ 
+        // ربط الحسابات الذكية بشكل مباشر
+        calculatePayments();
+    }
+ 
+    function calculatePayments() {
+        const pmtLimit = parseFloat(document.getElementById('inp-pmt-limit').value) || 349;
+        const aliPerc = parseFloat(document.getElementById('inp-ali-perc').value) || 2.99;
+        const bankPerc = parseFloat(document.getElementById('inp-bank-perc').value) || 2.5;
+ 
+        const gt = globalGrandTotal; // الإجمالي الكلي للرولات
+ 
+        // حساب عدد الدفعات
+        let numPayments = 0;
+        let pmtDetails = "";
+        if (pmtLimit > 0 && gt > 0) {
+            const fullPayments = Math.floor(gt / pmtLimit);
+            const remainder = gt % pmtLimit;
+            numPayments = Math.ceil(gt / pmtLimit);
+ 
+            if (remainder > 0 && fullPayments > 0) {
+                pmtDetails = `(${fullPayments} دفعات كاملة + دفعة واحدة بقيمة ${formatMoneyD(remainder)})`;
+            } else if (fullPayments > 0) {
+                pmtDetails = `(${fullPayments} دفعات كاملة)`;
+            } else if (remainder > 0) {
+                pmtDetails = `(دفعة واحدة بقيمة ${formatMoneyD(remainder)})`;
+            }
+        }
+ 
+        // الحسابات المالية كما طلبت بالضبط
+        const aliTotal = gt * (aliPerc / 100);
+        const subTotal = gt + aliTotal; // الإجمالي + عمولة علي بابا
+        const bankTotal = subTotal * (bankPerc / 100);
+        const commissionsTotal = aliTotal + bankTotal; // مجموع العمولات فقط
+        const finalCost = gt + commissionsTotal;
+ 
+        // تحديث واجهة المستخدم
+        document.getElementById('lbl-pmt-count').innerText = numPayments;
+        document.getElementById('lbl-pmt-details').innerText = pmtDetails;
+ 
+        document.getElementById('lbl-ali-total-usd').innerText = formatMoneyD(aliTotal);
+        document.getElementById('lbl-ali-total-iqd').innerText = `(${formatMoney(aliTotal * EXCHANGE_RATE)} د.ع)`;
+ 
+        document.getElementById('lbl-bank-total-usd').innerText = formatMoneyD(bankTotal);
+        document.getElementById('lbl-bank-total-iqd').innerText = `(${formatMoney(bankTotal * EXCHANGE_RATE)} د.ع)`;
+ 
+        document.getElementById('lbl-commissions-total-usd').innerText = formatMoneyD(commissionsTotal);
+        document.getElementById('lbl-commissions-total-iqd').innerText = `(${formatMoney(commissionsTotal * EXCHANGE_RATE)} د.ع)`;
+ 
+        document.getElementById('lbl-final-total-usd').innerText = formatMoneyD(finalCost);
+        document.getElementById('lbl-final-total-iqd').innerText = `${formatMoney(finalCost * EXCHANGE_RATE)} د.ع`;
+ 
+        // تخزين البيانات للطباعة
+        printData = {
+            gtRolls: gt,
+            aliPerc: aliPerc, aliTotal: aliTotal,
+            bankPerc: bankPerc, bankTotal: bankTotal,
+            commissionsTotal: commissionsTotal,
+            finalTotal: finalCost,
+            numPayments: numPayments, pmtDetails: pmtDetails
+        };
+    }
+ 
+    // دوال الجدول (نفسها بدون تغيير)
+    function addRow() {
+        const tbody = document.getElementById('table-body');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><input type="number" class="w-val short-input" value="50" step="1" oninput="calculateAll()"></td>
+            <td><input type="number" class="l-val short-input" value="20" step="1" oninput="calculateAll()"></td>
+            <td>
+                <select class="t-val short-input" onchange="calculateAll()">
+                    <option value="2.5" selected>2.5</option>
+                    <option value="1.5">1.5</option>
+                </select>
+            </td>
+            <td><input type="number" class="q-val short-input" value="1" step="1" oninput="calculateAll()"></td>
+            <td><input type="text" class="n-val" placeholder="" oninput="calculateAll()"></td>
+            <td style="text-align: right; font-weight: 600;" class="u-price">$0.00</td>
+            <td style="text-align: right; font-weight: 600;" class="l-total">$0.00</td>
+            <td>
+                <div class="actions-cell">
+                    <button class="btn-action btn-move" onclick="moveUp(this)" title="Move Up">⬆️</button>
+                    <button class="btn-action btn-move" onclick="moveDown(this)" title="Move Down">⬇️</button>
+                    <button class="btn-action btn-delete" onclick="deleteRow(this)" title="Delete">X</button>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(tr);
+        calculateAll();
+    }
+ 
+    function deleteRow(btn) { btn.closest('tr').remove(); calculateAll(); }
+    function moveUp(btn) { const row = btn.closest('tr'); if (row.previousElementSibling) row.parentNode.insertBefore(row, row.previousElementSibling); }
+    function moveDown(btn) { const row = btn.closest('tr'); if (row.nextElementSibling) row.parentNode.insertBefore(row.nextElementSibling, row); }
+ 
+    function generatePDF(mode) {
+        const rows = document.querySelectorAll('#table-body tr');
+        let printTotalQty = 0;
+ 
+        let printHTML = `
+            <table class="pdf-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Roll Size</th>
+                        <th style="text-align: center;">Quantity</th>
+                        ${mode === 'full' ? `
+                            <th style="text-align: right;">Unit Price (USD)</th>
+                            <th style="text-align: right;">Line Total (USD)</th>
+                        ` : ''}
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+ 
+        rows.forEach((row) => {
+            const w = row.querySelector('.w-val').value || '0';
+            const l = row.querySelector('.l-val').value || '0';
+            const t = row.querySelector('.t-val').value || '0';
+            const noteInput = row.querySelector('.n-val').value.trim();
+            const note = noteInput ? ` (${noteInput})` : '';
+ 
+            const q = parseInt(row.querySelector('.q-val').value) || 0;
+            const uPrice = parseFloat(row.dataset.unitPrice) || 0;
+            const lTotal = parseFloat(row.dataset.lineTotal) || 0;
+ 
+            printTotalQty += q;
+            const rollSizeStr = `${w} cm &times; ${l} m &times; ${t} mm${note}`;
+ 
+            printHTML += `
+                <tr>
+                    <td style="text-align: left;">${rollSizeStr}</td>
+                    <td style="text-align: center;">${q}</td>
+                    ${mode === 'full' ? `
+                        <td style="text-align: right;">${formatMoneyD(uPrice)}</td>
+                        <td style="text-align: right;">${formatMoneyD(lTotal)}</td>
+                    ` : ''}
+                </tr>
+            `;
+        });
+ 
+        const totalIQD = printData.gtRolls * EXCHANGE_RATE;
+ 
+        printHTML += `
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td style="text-align: left;">Total Rolls</td>
+                        <td style="text-align: center;">${printTotalQty}</td>
+                        ${mode === 'full' ? `
+                            <td style="text-align: center;">-</td>
+                            <td style="text-align: right;">${formatMoneyD(printData.gtRolls)}</td>
+                        ` : ''}
+                    </tr>
+                </tfoot>
+            </table>
+        `;
+ 
+        if(mode === 'full') {
+            printHTML += `
+                <table class="pdf-payments-table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">تقرير التكلفة الشاملة والعمولات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>إجمالي سعر الرولات</td>
+                            <td>${formatMoneyD(printData.gtRolls)}</td>
+                            <td>${formatMoney(printData.gtRolls * EXCHANGE_RATE)} د.ع</td>
+                        </tr>
+                        <tr>
+                            <td>إجمالي عمولات علي بابا (${printData.aliPerc}%)</td>
+                            <td>${formatMoneyD(printData.aliTotal)}</td>
+                            <td>${formatMoney(printData.aliTotal * EXCHANGE_RATE)} د.ع</td>
+                        </tr>
+                        <tr>
+                            <td>إجمالي عمولات البنك (${printData.bankPerc}%)</td>
+                            <td>${formatMoneyD(printData.bankTotal)}</td>
+                            <td>${formatMoney(printData.bankTotal * EXCHANGE_RATE)} د.ع</td>
+                        </tr>
+                        <tr class="commissions-total-print">
+                            <td>مجموع العمولات (علي بابا + البنك)</td>
+                            <td>${formatMoneyD(printData.commissionsTotal)}</td>
+                            <td>${formatMoney(printData.commissionsTotal * EXCHANGE_RATE)} د.ع</td>
+                        </tr>
+                        <tr>
+                            <td>عدد الدفعات المطلوبة</td>
+                            <td colspan="2" style="text-align: center; direction: rtl;">
+                                <span style="font-family: 'Inter', sans-serif;">${printData.numPayments}</span> دفعات
+                                <div style="font-size: 11pt; color: #4b5563;">${printData.pmtDetails}</div>
+                            </td>
+                        </tr>
+                        <tr class="total-all-print">
+                            <td>المبلغ النهائي الشامل (التكلفة الفعلية)</td>
+                            <td>${formatMoneyD(printData.finalTotal)}</td>
+                            <td>${formatMoney(printData.finalTotal * EXCHANGE_RATE)} د.ع</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }
+ 
+        document.getElementById('print-area').innerHTML = printHTML;
+        window.print();
+    }
+ 
+    window.onload = function() {
+        calculateAll();
+    };
 </script>
-
 </body>
 </html>
+ 

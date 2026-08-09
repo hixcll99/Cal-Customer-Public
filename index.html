@@ -1,6 +1,3 @@
-
-
-Rolls pricing · HTML
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -9,7 +6,7 @@ Rolls pricing · HTML
     <title>Rolls Pricing System</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
- 
+
         :root {
             --primary: #18dcd8;
             --primary-dark: #15b8b4;
@@ -18,9 +15,9 @@ Rolls pricing · HTML
             --text: #1f2937;
             --border: #e5e7eb;
         }
- 
+
         * { box-sizing: border-box; }
- 
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
@@ -30,7 +27,7 @@ Rolls pricing · HTML
             display: flex;
             justify-content: center;
         }
- 
+
         .container {
             background: var(--surface);
             width: 100%;
@@ -39,7 +36,7 @@ Rolls pricing · HTML
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
             padding: 36px;
         }
- 
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -50,7 +47,7 @@ Rolls pricing · HTML
             flex-wrap: wrap;
             gap: 20px;
         }
- 
+
         .header h1 {
             margin: 0;
             font-size: 1.5rem;
@@ -60,7 +57,7 @@ Rolls pricing · HTML
             align-items: center;
             gap: 10px;
         }
- 
+
         .header h1::before {
             content: '';
             display: inline-block;
@@ -69,13 +66,13 @@ Rolls pricing · HTML
             border-radius: 4px;
             background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
         }
- 
+
         .settings-container {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
- 
+
         .settings-card {
             background: var(--bg);
             padding: 9px 16px;
@@ -86,18 +83,18 @@ Rolls pricing · HTML
             border: 1px solid var(--border);
             transition: border-color 0.2s;
         }
- 
+
         .settings-card:focus-within {
             border-color: var(--primary);
         }
- 
+
         .settings-card label {
             font-size: 0.85rem;
             font-weight: 600;
             color: #6b7280;
             white-space: nowrap;
         }
- 
+
         .settings-card input {
             width: 75px;
             padding: 7px;
@@ -109,22 +106,22 @@ Rolls pricing · HTML
             outline: none;
             transition: border-color 0.2s;
         }
- 
+
         .settings-card input:focus { border-color: var(--primary); }
- 
+
         .table-wrap {
             overflow-x: auto;
             border-radius: 12px;
             border: 1px solid var(--border);
             margin-bottom: 22px;
         }
- 
+
         .ui-table {
             width: 100%;
             border-collapse: collapse;
             min-width: 780px;
         }
- 
+
         .ui-table th {
             text-align: left;
             padding: 13px 12px;
@@ -136,15 +133,15 @@ Rolls pricing · HTML
             background: #f9fafb;
             border-bottom: 1px solid var(--border);
         }
- 
+
         .ui-table td {
             padding: 9px 10px;
             border-bottom: 1px solid var(--border);
         }
- 
+
         .ui-table tbody tr:last-child td { border-bottom: none; }
         .ui-table tbody tr:hover { background: #fafafa; }
- 
+
         .ui-table input, .ui-table select {
             width: 100%;
             padding: 9px 10px;
@@ -157,14 +154,14 @@ Rolls pricing · HTML
             font-size: 0.92rem;
             transition: border-color 0.15s, box-shadow 0.15s;
         }
- 
+
         .ui-table input:focus, .ui-table select:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(24, 220, 216, 0.15);
         }
- 
+
         .ui-table .short-input { width: 85px; }
- 
+
         .btn {
             background: var(--primary);
             color: #fff;
@@ -176,17 +173,17 @@ Rolls pricing · HTML
             font-size: 0.92rem;
             transition: background 0.2s, transform 0.1s;
         }
- 
+
         .btn:hover { background: var(--primary-dark); }
         .btn:active { transform: translateY(1px); }
- 
+
         .actions-cell {
             display: flex;
             gap: 5px;
             justify-content: flex-end;
             align-items: center;
         }
- 
+
         .btn-action {
             border: none;
             border-radius: 6px;
@@ -198,42 +195,50 @@ Rolls pricing · HTML
             justify-content: center;
             transition: 0.15s;
         }
- 
+
         .btn-move { background: #eef0f2; color: #374151; }
         .btn-move:hover { background: #d1d5db; }
         .btn-delete { background: #fee2e2; color: #ef4444; font-weight: bold; }
         .btn-delete:hover { background: #fca5a5; }
- 
+
         .btn-pdf { background: #374151; margin-left: 10px; }
         .btn-pdf:hover { background: #1f2937; }
         .btn-pdf-simple { background: #6b7280; margin-left: 10px; }
         .btn-pdf-simple:hover { background: #4b5563; }
- 
+
         .bottom-sections {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 24px;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 20px;
             margin-top: 32px;
             border-top: 1px dashed var(--border);
             padding-top: 32px;
         }
- 
+
         .buttons-group {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
- 
+
+        .summary-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 26px;
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.06);
+        }
+
         .totals-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            align-items: flex-end;
-            min-width: 300px;
+            gap: 12px;
         }
- 
+
         .total-box {
             background: var(--bg);
             padding: 15px 22px;
@@ -246,24 +251,24 @@ Rolls pricing · HTML
             box-sizing: border-box;
             text-align: right;
         }
- 
+
         .total-box span.main-val {
             color: var(--text);
             font-weight: 700;
             font-size: 1.35rem;
             margin-left: 10px;
         }
- 
+
         .grand-total {
             background-color: #f0fdfa;
             border-color: #ccfbf1;
         }
- 
+
         .grand-total span.main-val {
             color: var(--primary-dark);
             font-size: 1.55rem;
         }
- 
+
         .iqd-text {
             display: block;
             font-family: 'Cairo', sans-serif;
@@ -277,20 +282,13 @@ Rolls pricing · HTML
             -webkit-text-fill-color: transparent;
             direction: ltr;
         }
- 
+
         /* --- قسم ملخص التكلفة الذكي --- */
         .payments-panel {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 26px;
-            width: 100%;
-            max-width: 500px;
             font-family: 'Cairo', sans-serif;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.06);
             direction: rtl;
         }
- 
+
         .payments-panel h3 {
             margin: 0 0 18px 0;
             color: #1f2937;
@@ -300,7 +298,7 @@ Rolls pricing · HTML
             padding-bottom: 10px;
             display: inline-block;
         }
- 
+
         .payment-row {
             display: flex;
             justify-content: space-between;
@@ -310,11 +308,11 @@ Rolls pricing · HTML
             font-size: 1rem;
             color: #4b5563;
         }
- 
+
         .payment-row:last-of-type {
             border-bottom: none;
         }
- 
+
         .payment-row.commissions-total {
             background: #f0fdfa;
             border: 1px solid #ccfbf1;
@@ -323,11 +321,11 @@ Rolls pricing · HTML
             margin-top: 4px;
             font-weight: 700;
         }
- 
+
         .payment-row.commissions-total span:first-child {
             color: #0f766e;
         }
- 
+
         .payment-row.total-all {
             background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
             color: #ffffff;
@@ -337,13 +335,22 @@ Rolls pricing · HTML
             margin-top: 15px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
         }
- 
-        .val-usd { font-family: 'Inter', sans-serif; font-weight: 700; direction: ltr; display: inline-block; }
-        .val-iqd { color: #059669; font-size: 0.95rem; font-weight: 700; margin-right: 12px; }
- 
+
+        .val-usd { font-family: 'Inter', sans-serif; font-weight: 700; direction: ltr; display: inline-block; white-space: nowrap; }
+        .val-iqd { color: #059669; font-size: 0.95rem; font-weight: 700; margin-right: 12px; white-space: nowrap; }
+
+        .value-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
+        }
+
+        .value-stack .val-iqd { margin-right: 0; }
+
         .payment-row.total-all .val-iqd { color: #a7f3d0; font-size: 1.15rem;}
         .payment-row.commissions-total .val-iqd { color: #0d9488; }
- 
+
         .inline-input {
             width: 62px;
             padding: 5px;
@@ -357,72 +364,86 @@ Rolls pricing · HTML
             margin: 0 5px;
             direction: ltr;
         }
- 
+
         .inline-input:focus { border-color: var(--primary); }
- 
+
         #print-area { display: none; }
- 
+
         @media print {
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            @page { size: A4 portrait; margin: 15mm; }
+            @page { size: A4 portrait; margin: 10mm; }
             body { background-color: #fff; margin: 0; padding: 0; }
             .container { display: none !important; }
             #print-area { display: block !important; width: 100%; }
- 
+
             .pdf-table {
                 width: 100%;
                 border-collapse: collapse;
                 font-family: 'Calibri', 'Inter', sans-serif;
-                font-size: 13pt;
-                margin-bottom: 20px;
+                font-size: 10.5pt;
+                margin-bottom: 12px;
+                table-layout: auto;
             }
-            .pdf-table th, .pdf-table td { border: 1pt solid #9cc2e5 !important; padding: 8px 10px; color: #000 !important; }
+            .pdf-table th, .pdf-table td { border: 1pt solid #9cc2e5 !important; padding: 4px 8px; color: #000 !important; white-space: nowrap; }
             .pdf-table thead th { background-color: #5b9bd5 !important; color: #ffffff !important; font-weight: bold; }
             .pdf-table tbody tr:nth-child(even) { background-color: #ddebf7 !important; }
             .pdf-table tbody tr:nth-child(odd) { background-color: #ffffff !important; }
             .pdf-table tfoot th, .pdf-table tfoot td { background-color: #404040 !important; color: #ffffff !important; font-weight: bold; border: 1pt solid #404040 !important; }
- 
-            .pdf-table tfoot .iqd-print-row td { background-color: #f0fdfa !important; color: #0f766e !important; border: 1pt solid #0f766e !important; font-family: 'Cairo', 'Inter', sans-serif; font-size: 14pt; font-weight: bold; }
- 
+
+            .pdf-table tfoot .iqd-print-row td { background-color: #f0fdfa !important; color: #0f766e !important; border: 1pt solid #0f766e !important; font-family: 'Cairo', 'Inter', sans-serif; font-size: 11pt; font-weight: bold; }
+
+            .pdf-table-simple { font-size: 16pt; }
+            .pdf-table-simple th, .pdf-table-simple td { padding: 14px 18px; }
+
             .pdf-payments-table {
-                width: 75%;
-                margin: 30px auto 0 auto;
+                width: 92%;
+                margin: 14px auto 0 auto;
                 border-collapse: collapse;
                 font-family: 'Cairo', 'Inter', sans-serif;
-                font-size: 13pt;
+                font-size: 10.5pt;
                 direction: rtl;
+                page-break-inside: avoid;
             }
-            .pdf-payments-table th { background-color: #0f766e !important; color: #ffffff !important; padding: 10px; text-align: center; border: 1pt solid #0f766e; font-size: 15pt; }
-            .pdf-payments-table td { padding: 10px 15px; border: 1pt solid #cbd5e1; }
-            .pdf-payments-table td:first-child { font-weight: bold; background-color: #f8fafc; width: 45%; }
+            .pdf-payments-table th { background-color: #0f766e !important; color: #ffffff !important; padding: 6px; text-align: center; border: 1pt solid #0f766e; font-size: 12pt; }
+            .pdf-payments-table td { padding: 5px 12px; border: 1pt solid #cbd5e1; white-space: nowrap; }
+            .pdf-payments-table tr { page-break-inside: avoid; }
+            .pdf-payments-table td:first-child { font-weight: bold; background-color: #f8fafc; width: 45%; white-space: normal; }
             .pdf-payments-table td:nth-child(2) { direction: ltr; text-align: left; font-family: 'Inter', sans-serif; width: 25%; font-weight: bold;}
             .pdf-payments-table td:last-child { direction: rtl; text-align: right; color: #059669; width: 30%; font-weight: bold;}
- 
+
             .pdf-payments-table tr.commissions-total-print td { background-color: #f0fdfa !important; color: #0f766e !important; }
             .pdf-payments-table tr.commissions-total-print td:last-child { color: #0d9488 !important; }
- 
-            .pdf-payments-table tr.total-all-print td { background-color: #1f2937 !important; color: #ffffff !important; font-weight: bold; font-size: 14pt; }
+
+            .pdf-payments-table tr.total-all-print td { background-color: #1f2937 !important; color: #ffffff !important; font-weight: bold; font-size: 11.5pt; }
             .pdf-payments-table tr.total-all-print td:last-child { color: #a7f3d0 !important; }
         }
     </style>
 </head>
 <body>
- 
+
 <div class="container">
     <div class="header">
         <h1>Rolls Pricing & Management</h1>
         <div class="settings-container">
             <div class="settings-card">
                 <label>2.5mm Price/Sqm</label>
-                <input type="number" id="price-25" value="3.85" step="0.01" oninput="calculateAll()">
+                <input type="number" id="price-25" value="3.4" step="0.01" oninput="calculateAll()">
             </div>
             <div class="settings-card">
                 <label>1.5mm Price/Sqm</label>
-                <input type="number" id="price-15" value="2.50" step="0.01" oninput="calculateAll()">
+                <input type="number" id="price-15" value="2.31" step="0.01" oninput="calculateAll()">
+            </div>
+            <div class="settings-card">
+                <label>Roll Diameter (cm)</label>
+                <input type="number" id="roll-diameter" value="29" step="0.5" oninput="calculateAll()">
+            </div>
+            <div class="settings-card">
+                <label>CBM Price (USD)</label>
+                <input type="number" id="cbm-price" value="0" step="0.01" oninput="calculateAll()">
             </div>
         </div>
     </div>
- 
+
     <div class="table-wrap">
         <table class="ui-table">
             <thead>
@@ -434,97 +455,26 @@ Rolls pricing · HTML
                     <th>Note (Optional)</th>
                     <th style="text-align: right;">Unit Price</th>
                     <th style="text-align: right;">Line Total</th>
+                    <th style="text-align: right;">CBM (m&sup3;)</th>
+                    <th style="text-align: right;">Import Cost</th>
                     <th style="text-align: right; width: 100px;">Actions</th>
                 </tr>
             </thead>
             <tbody id="table-body">
-                <tr>
-                    <td><input type="number" class="w-val short-input" value="40" step="1" oninput="calculateAll()"></td>
-                    <td><input type="number" class="l-val short-input" value="20" step="1" oninput="calculateAll()"></td>
-                    <td>
-                        <select class="t-val short-input" onchange="calculateAll()">
-                            <option value="2.5" selected>2.5</option>
-                            <option value="1.5">1.5</option>
-                        </select>
-                    </td>
-                    <td><input type="number" class="q-val short-input" value="2" step="1" oninput="calculateAll()"></td>
-                    <td><input type="text" class="n-val" placeholder="e.g. Other type" oninput="calculateAll()"></td>
-                    <td style="text-align: right; font-weight: 600;" class="u-price">$0.00</td>
-                    <td style="text-align: right; font-weight: 600;" class="l-total">$0.00</td>
-                    <td>
-                        <div class="actions-cell">
-                            <button class="btn-action btn-move" onclick="moveUp(this)" title="Move Up">⬆️</button>
-                            <button class="btn-action btn-move" onclick="moveDown(this)" title="Move Down">⬇️</button>
-                            <button class="btn-action btn-delete" onclick="deleteRow(this)" title="Delete">X</button>
-                        </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
- 
+
     <div class="buttons-group" style="margin-bottom: 20px;">
         <button class="btn" onclick="addRow()">+ Add Row</button>
         <button class="btn btn-pdf" onclick="generatePDF('full')">📄 Print Full (with prices)</button>
         <button class="btn btn-pdf-simple" onclick="generatePDF('simple')">📄 Print Simple (no prices)</button>
     </div>
- 
+
     <div class="bottom-sections">
- 
-        <!-- قسم ملخص التكلفة الذكي -->
-        <div class="payments-panel">
-            <h3>التكلفة النهائية الشاملة (مع العمولات)</h3>
- 
-            <div class="payment-row">
-                <span>حد الدفعة الواحدة للاستقطاع:</span>
-                <div>
-                    <span class="val-usd">$</span><input type="number" id="inp-pmt-limit" class="inline-input" value="349" step="1" oninput="calculatePayments()">
-                </div>
-            </div>
- 
-            <div class="payment-row">
-                <span>عدد الدفعات المتوقعة:</span>
-                <div style="text-align: left;">
-                    <span style="font-weight: 800; color: #0f766e; font-size: 1.15rem;" id="lbl-pmt-count">0</span> <span style="font-weight: bold;">دفعات</span><br>
-                    <span style="font-size: 0.82rem; color: #6b7280; direction: rtl; display: block;" id="lbl-pmt-details"></span>
-                </div>
-            </div>
- 
-            <div class="payment-row">
-                <span>إجمالي عمولات علي بابا (<input type="number" id="inp-ali-perc" class="inline-input" style="width:58px;" value="2.99" step="0.01" oninput="calculatePayments()">%):</span>
-                <div>
-                    <span class="val-iqd" id="lbl-ali-total-iqd">0 د.ع</span>
-                    <span class="val-usd" id="lbl-ali-total-usd">$0.00</span>
-                </div>
-            </div>
- 
-            <div class="payment-row">
-                <span>إجمالي عمولات البطاقة البنكية (<input type="number" id="inp-bank-perc" class="inline-input" style="width:58px;" value="2.5" step="0.1" oninput="calculatePayments()">%):</span>
-                <div>
-                    <span class="val-iqd" id="lbl-bank-total-iqd">0 د.ع</span>
-                    <span class="val-usd" id="lbl-bank-total-usd">$0.00</span>
-                </div>
-            </div>
- 
-            <div class="payment-row commissions-total">
-                <span>مجموع العمولات (علي بابا + البنك):</span>
-                <div>
-                    <span class="val-iqd" id="lbl-commissions-total-iqd">0 د.ع</span>
-                    <span class="val-usd" id="lbl-commissions-total-usd" style="color: #0f766e;">$0.00</span>
-                </div>
-            </div>
- 
-            <div class="payment-row total-all" style="flex-direction: column; align-items: flex-start; gap: 15px;">
-                <span style="border-bottom: 1px solid #4b5563; width: 100%; padding-bottom: 8px; font-size: 1.15rem;">المبلغ النهائي الكلي الشامل (ما سيتم دفعه):</span>
-                <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
-                    <span class="val-iqd" id="lbl-final-total-iqd" style="font-size: 1.2rem;">0 د.ع</span>
-                    <span class="val-usd" id="lbl-final-total-usd" style="font-size: 1.7rem; color: #10b981;">$0.00</span>
-                </div>
-            </div>
-        </div>
- 
+
         <!-- قسم الإجمالي الكلي للرولات (بدون عمولات) -->
-        <div class="totals-container">
+        <div class="totals-container summary-card">
             <div class="total-box">
                 Total Rolls: <span id="total-qty-val" class="main-val">0</span>
             </div>
@@ -533,17 +483,142 @@ Rolls pricing · HTML
                 <div id="grand-total-iqd" class="iqd-text">≈ 0 د.ع</div>
             </div>
         </div>
- 
+
+        <!-- قسم ملخص التكلفة الذكي -->
+        <div class="payments-panel summary-card">
+            <h3>التكلفة النهائية الشاملة (مع العمولات)</h3>
+
+            <div class="payment-row">
+                <span>حد الدفعة الواحدة للاستقطاع:</span>
+                <div>
+                    <span class="val-usd">$</span><input type="number" id="inp-pmt-limit" class="inline-input" value="349" step="1" oninput="calculatePayments()">
+                </div>
+            </div>
+
+            <div class="payment-row">
+                <span>عدد الدفعات المتوقعة:</span>
+                <div style="text-align: left;">
+                    <span style="font-weight: 800; color: #0f766e; font-size: 1.15rem;" id="lbl-pmt-count">0</span> <span style="font-weight: bold;">دفعات</span><br>
+                    <span style="font-size: 0.82rem; color: #6b7280; direction: rtl; display: block;" id="lbl-pmt-details"></span>
+                </div>
+            </div>
+
+            <div class="payment-row">
+                <span>إجمالي عمولات علي بابا (<input type="number" id="inp-ali-perc" class="inline-input" style="width:58px;" value="2.99" step="0.01" oninput="calculatePayments()">%):</span>
+                <div class="value-stack">
+                    <span class="val-iqd" id="lbl-ali-total-iqd">0 د.ع</span>
+                    <span class="val-usd" id="lbl-ali-total-usd">$0.00</span>
+                </div>
+            </div>
+
+            <div class="payment-row">
+                <span>إجمالي عمولات البطاقة البنكية (<input type="number" id="inp-bank-perc" class="inline-input" style="width:58px;" value="2.5" step="0.1" oninput="calculatePayments()">%):</span>
+                <div class="value-stack">
+                    <span class="val-iqd" id="lbl-bank-total-iqd">0 د.ع</span>
+                    <span class="val-usd" id="lbl-bank-total-usd">$0.00</span>
+                </div>
+            </div>
+
+            <div class="payment-row commissions-total">
+                <span>مجموع العمولات:</span>
+                <div class="value-stack">
+                    <span class="val-iqd" id="lbl-commissions-total-iqd">0 د.ع</span>
+                    <span class="val-usd" id="lbl-commissions-total-usd" style="color: #0f766e;">$0.00</span>
+                </div>
+            </div>
+
+            <div class="payment-row total-all" style="flex-direction: column; align-items: flex-start; gap: 15px;">
+                <span style="border-bottom: 1px solid #4b5563; width: 100%; padding-bottom: 8px; font-size: 1.15rem;">المبلغ النهائي الكلي الشامل (ما سيتم دفعه):</span>
+                <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                    <span class="val-iqd" id="lbl-final-total-iqd" style="font-size: 1.2rem;">0 د.ع</span>
+                    <span class="val-usd" id="lbl-final-total-usd" style="font-size: 1.7rem; color: #10b981;">$0.00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم تكلفة الاستيراد (CBM) -->
+        <div class="payments-panel summary-card">
+            <h3>تكلفة الاستيراد (CBM)</h3>
+            <div class="payment-row">
+                <span>إجمالي حجم الشحنة:</span>
+                <span style="font-weight: 800; color: #0f766e;" id="total-cbm-val">0.000 m³</span>
+            </div>
+            <div class="payment-row">
+                <span>سعر الصرف الخاص بالشحن:</span>
+                <div>
+                    <span class="val-usd">1$ =</span><input type="number" id="import-exchange-rate" class="inline-input" value="1500" step="1" oninput="calculateAll()"><span class="val-usd">د.ع</span>
+                </div>
+            </div>
+            <div class="payment-row">
+                <span>إجمالي تكلفة الاستيراد:</span>
+                <div class="value-stack">
+                    <span class="val-iqd" id="total-import-iqd">0 د.ع</span>
+                    <span class="val-usd" id="total-import-usd" style="color:#0f766e;">$0.00</span>
+                </div>
+            </div>
+            <div class="payment-row">
+                <span>متوسط تكلفة الاستيراد لكل رولة:</span>
+                <span class="val-usd" id="avg-import-per-roll" style="color:#0f766e;">$0.00</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #9ca3af; margin-top: 12px; line-height: 1.6;">
+                الحساب يفترض أن كل رولة أسطوانة قطرها ثابت (حقل "Roll Diameter") وارتفاعها هو قيمة العرض. عدّل القطر أعلاه ليطابق شحناتك الفعلية بشكل أدق.
+            </div>
+        </div>
+
+        <!-- قسم التكلفة الإجمالية الكاملة (بضاعة + شحن + عمولات) -->
+        <div class="payments-panel summary-card">
+            <h3>التكلفة الإجمالية الكاملة (بضاعة + شحن + عمولات)</h3>
+
+            <div class="payment-row">
+                <span>سعر البضاعة:</span>
+                <div class="value-stack">
+                    <span class="val-iqd" id="gc-goods-iqd">0 د.ع</span>
+                    <span class="val-usd" id="gc-goods-usd">$0.00</span>
+                </div>
+            </div>
+
+            <div class="payment-row">
+                <span>تكلفة الشحن (الاستيراد):</span>
+                <div class="value-stack">
+                    <span class="val-iqd" id="gc-shipping-iqd">0 د.ع</span>
+                    <span class="val-usd" id="gc-shipping-usd" style="color:#0f766e;">$0.00</span>
+                </div>
+            </div>
+
+            <div class="payment-row commissions-total">
+                <span>مجموع العمولات:</span>
+                <div class="value-stack">
+                    <span class="val-iqd" id="gc-comm-iqd">0 د.ع</span>
+                    <span class="val-usd" id="gc-comm-usd" style="color: #0f766e;">$0.00</span>
+                </div>
+            </div>
+
+            <div class="payment-row total-all" style="flex-direction: column; align-items: flex-start; gap: 15px;">
+                <span style="border-bottom: 1px solid #4b5563; width: 100%; padding-bottom: 8px; font-size: 1.15rem;">التكلفة الكلية الفعلية (بضاعة + شحن + عمولات):</span>
+                <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                    <span class="val-iqd" id="gc-final-iqd" style="font-size: 1.2rem;">0 د.ع</span>
+                    <span class="val-usd" id="gc-final-usd" style="font-size: 1.7rem; color: #10b981;">$0.00</span>
+                </div>
+            </div>
+
+            <div style="font-size: 0.78rem; color: #9ca3af; margin-top: 12px; line-height: 1.6;">
+                يتم تحويل كل بند حسب سعر صرفه الخاص: سعر البضاعة والعمولات حسب السعر العام، وتكلفة الشحن حسب سعر صرف الاستيراد أعلاه — لذلك قيمة الدينار هنا مجموع ثلاث عمليات تحويل منفصلة، وليست ناتج ضرب برقم واحد.
+            </div>
+        </div>
+
     </div>
 </div>
- 
+
 <div id="print-area"></div>
- 
+
 <script>
     let globalGrandTotal = 0;
     let globalTotalQty = 0;
+    let globalTotalCBM = 0;
+    let globalImportCost = 0;
+    let globalImportExchangeRate = 1500;
     const EXCHANGE_RATE = 1320;
- 
+
     // تخزين البيانات للطباعة
     let printData = {
         gtRolls: 0,
@@ -553,56 +628,82 @@ Rolls pricing · HTML
         finalTotal: 0,
         numPayments: 0, pmtDetails: ""
     };
- 
-    const formatMoney = (amount) => amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const formatMoney = (amount) => amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     const formatMoneyD = (amount) => amount.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 });
- 
+
     function calculateAll() {
         const price25 = parseFloat(document.getElementById('price-25').value) || 0;
         const price15 = parseFloat(document.getElementById('price-15').value) || 0;
+        const diameterCm = parseFloat(document.getElementById('roll-diameter').value) || 0;
+        const cbmPrice = parseFloat(document.getElementById('cbm-price').value) || 0;
         const rows = document.querySelectorAll('#table-body tr');
- 
+
         globalGrandTotal = 0;
         globalTotalQty = 0;
- 
+        globalTotalCBM = 0;
+        globalImportCost = 0;
+
+        const diameterM = diameterCm / 100;
+
         rows.forEach(row => {
             const w = parseFloat(row.querySelector('.w-val').value) || 0;
             const l = parseFloat(row.querySelector('.l-val').value) || 0;
             const t = parseFloat(row.querySelector('.t-val').value) || 2.5;
             const q = parseInt(row.querySelector('.q-val').value) || 0;
- 
+
             const sqmPrice = (t === 1.5) ? price15 : price25;
             const area = (w / 100) * l;
             const unitPrice = area * sqmPrice;
             const lineTotal = unitPrice * q;
- 
+
+            // كل رولة عبارة عن أسطوانة قطرها ثابت (roll-diameter) وارتفاعها هو "العرض"
+            // الحجم = قطر² × العرض (بالمتر) — تقريب صندوقي لحيز الشحن (CBM)
+            const cbmPerRoll = diameterM * diameterM * (w / 100);
+            const lineCBM = cbmPerRoll * q;
+            const lineImportCost = lineCBM * cbmPrice;
+
             row.dataset.unitPrice = unitPrice;
             row.dataset.lineTotal = lineTotal;
- 
+            row.dataset.lineCbm = lineCBM;
+            row.dataset.lineImportCost = lineImportCost;
+
             row.querySelector('.u-price').innerText = formatMoneyD(unitPrice);
             row.querySelector('.l-total').innerText = formatMoneyD(lineTotal);
- 
+            row.querySelector('.cbm-val').innerText = lineCBM.toFixed(3) + ' m³';
+            row.querySelector('.imp-val').innerText = formatMoneyD(lineImportCost);
+
             globalGrandTotal += lineTotal;
             globalTotalQty += q;
+            globalTotalCBM += lineCBM;
+            globalImportCost += lineImportCost;
         });
- 
+
         document.getElementById('grand-total-val').innerText = formatMoneyD(globalGrandTotal);
         document.getElementById('total-qty-val').innerText = globalTotalQty;
- 
+
         const totalIQD = globalGrandTotal * EXCHANGE_RATE;
-        document.getElementById('grand-total-iqd').innerHTML = `≈ <span style="font-family: 'Inter', sans-serif;">${totalIQD.toLocaleString('en-US')}</span> د.ع`;
- 
+        document.getElementById('grand-total-iqd').innerHTML = `≈ <span style="font-family: 'Inter', sans-serif;">${formatMoney(totalIQD)}</span> د.ع`;
+
+        // تحديث لوحة الاستيراد
+        globalImportExchangeRate = parseFloat(document.getElementById('import-exchange-rate').value) || 1500;
+        document.getElementById('total-cbm-val').innerText = globalTotalCBM.toFixed(3) + ' m³';
+        document.getElementById('total-import-usd').innerText = formatMoneyD(globalImportCost);
+        document.getElementById('total-import-iqd').innerText = `${formatMoney(globalImportCost * globalImportExchangeRate)} د.ع`;
+        const avgImportPerRoll = globalTotalQty > 0 ? (globalImportCost / globalTotalQty) : 0;
+        document.getElementById('avg-import-per-roll').innerText = formatMoneyD(avgImportPerRoll);
+
         // ربط الحسابات الذكية بشكل مباشر
         calculatePayments();
     }
- 
+
     function calculatePayments() {
         const pmtLimit = parseFloat(document.getElementById('inp-pmt-limit').value) || 349;
         const aliPerc = parseFloat(document.getElementById('inp-ali-perc').value) || 2.99;
         const bankPerc = parseFloat(document.getElementById('inp-bank-perc').value) || 2.5;
- 
+
         const gt = globalGrandTotal; // الإجمالي الكلي للرولات
- 
+
         // حساب عدد الدفعات
         let numPayments = 0;
         let pmtDetails = "";
@@ -610,7 +711,7 @@ Rolls pricing · HTML
             const fullPayments = Math.floor(gt / pmtLimit);
             const remainder = gt % pmtLimit;
             numPayments = Math.ceil(gt / pmtLimit);
- 
+
             if (remainder > 0 && fullPayments > 0) {
                 pmtDetails = `(${fullPayments} دفعات كاملة + دفعة واحدة بقيمة ${formatMoneyD(remainder)})`;
             } else if (fullPayments > 0) {
@@ -619,30 +720,30 @@ Rolls pricing · HTML
                 pmtDetails = `(دفعة واحدة بقيمة ${formatMoneyD(remainder)})`;
             }
         }
- 
+
         // الحسابات المالية كما طلبت بالضبط
         const aliTotal = gt * (aliPerc / 100);
         const subTotal = gt + aliTotal; // الإجمالي + عمولة علي بابا
         const bankTotal = subTotal * (bankPerc / 100);
         const commissionsTotal = aliTotal + bankTotal; // مجموع العمولات فقط
         const finalCost = gt + commissionsTotal;
- 
+
         // تحديث واجهة المستخدم
         document.getElementById('lbl-pmt-count').innerText = numPayments;
         document.getElementById('lbl-pmt-details').innerText = pmtDetails;
- 
+
         document.getElementById('lbl-ali-total-usd').innerText = formatMoneyD(aliTotal);
         document.getElementById('lbl-ali-total-iqd').innerText = `(${formatMoney(aliTotal * EXCHANGE_RATE)} د.ع)`;
- 
+
         document.getElementById('lbl-bank-total-usd').innerText = formatMoneyD(bankTotal);
         document.getElementById('lbl-bank-total-iqd').innerText = `(${formatMoney(bankTotal * EXCHANGE_RATE)} د.ع)`;
- 
+
         document.getElementById('lbl-commissions-total-usd').innerText = formatMoneyD(commissionsTotal);
         document.getElementById('lbl-commissions-total-iqd').innerText = `(${formatMoney(commissionsTotal * EXCHANGE_RATE)} د.ع)`;
- 
+
         document.getElementById('lbl-final-total-usd').innerText = formatMoneyD(finalCost);
         document.getElementById('lbl-final-total-iqd').innerText = `${formatMoney(finalCost * EXCHANGE_RATE)} د.ع`;
- 
+
         // تخزين البيانات للطباعة
         printData = {
             gtRolls: gt,
@@ -652,25 +753,58 @@ Rolls pricing · HTML
             finalTotal: finalCost,
             numPayments: numPayments, pmtDetails: pmtDetails
         };
+
+        updateGrandCombined();
     }
- 
-    // دوال الجدول (نفسها بدون تغيير)
-    function addRow() {
+
+    function updateGrandCombined() {
+        // هذا الكرت يجمع 3 بنود، كل بند له سعر صرف مختلف:
+        // - سعر البضاعة والعمولات: حسب سعر الصرف العام (EXCHANGE_RATE)
+        // - تكلفة الشحن: حسب سعر صرف الاستيراد اليدوي (globalImportExchangeRate)
+        const goodsUSD = globalGrandTotal;
+        const goodsIQD = globalGrandTotal * EXCHANGE_RATE;
+
+        const shippingUSD = globalImportCost;
+        const shippingIQD = globalImportCost * globalImportExchangeRate;
+
+        const commUSD = printData.commissionsTotal;
+        const commIQD = printData.commissionsTotal * EXCHANGE_RATE;
+
+        const finalUSD = goodsUSD + shippingUSD + commUSD;
+        const finalIQD = goodsIQD + shippingIQD + commIQD; // مجموع 3 تحويلات منفصلة، وليس ناتج ضرب واحد
+
+        document.getElementById('gc-goods-usd').innerText = formatMoneyD(goodsUSD);
+        document.getElementById('gc-goods-iqd').innerText = `${formatMoney(goodsIQD)} د.ع`;
+
+        document.getElementById('gc-shipping-usd').innerText = formatMoneyD(shippingUSD);
+        document.getElementById('gc-shipping-iqd').innerText = `${formatMoney(shippingIQD)} د.ع`;
+
+        document.getElementById('gc-comm-usd').innerText = formatMoneyD(commUSD);
+        document.getElementById('gc-comm-iqd').innerText = `${formatMoney(commIQD)} د.ع`;
+
+        document.getElementById('gc-final-usd').innerText = formatMoneyD(finalUSD);
+        document.getElementById('gc-final-iqd').innerText = `${formatMoney(finalIQD)} د.ع`;
+    }
+
+    // دوال الجدول
+    function addRow(w = 50, l = 20, t = '2.5', q = 1) {
         const tbody = document.getElementById('table-body');
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><input type="number" class="w-val short-input" value="50" step="1" oninput="calculateAll()"></td>
-            <td><input type="number" class="l-val short-input" value="20" step="1" oninput="calculateAll()"></td>
+            <td><input type="number" class="w-val short-input" value="${w}" step="1" oninput="calculateAll()"></td>
+            <td><input type="number" class="l-val short-input" value="${l}" step="1" oninput="calculateAll()"></td>
             <td>
                 <select class="t-val short-input" onchange="calculateAll()">
-                    <option value="2.5" selected>2.5</option>
-                    <option value="1.5">1.5</option>
+                    <option value="2.5" ${t == '2.5' ? 'selected' : ''}>2.5</option>
+                    <option value="1.5" ${t == '1.5' ? 'selected' : ''}>1.5</option>
                 </select>
             </td>
-            <td><input type="number" class="q-val short-input" value="1" step="1" oninput="calculateAll()"></td>
+            <td><input type="number" class="q-val short-input" value="${q}" step="1" oninput="calculateAll()"></td>
             <td><input type="text" class="n-val" placeholder="" oninput="calculateAll()"></td>
             <td style="text-align: right; font-weight: 600;" class="u-price">$0.00</td>
             <td style="text-align: right; font-weight: 600;" class="l-total">$0.00</td>
+            <td style="text-align: right; color: #6b7280;" class="cbm-val">0.000 m&sup3;</td>
+            <td style="text-align: right; font-weight: 600; color: #0f766e;" class="imp-val">$0.00</td>
             <td>
                 <div class="actions-cell">
                     <button class="btn-action btn-move" onclick="moveUp(this)" title="Move Up">⬆️</button>
@@ -682,17 +816,26 @@ Rolls pricing · HTML
         tbody.appendChild(tr);
         calculateAll();
     }
- 
+
+    // يولّد صفوف افتراضية بعروض 50 إلى 150 (بفواصل 10)، طول 20م وسمك 2.5مم، بدون كمية محددة
+    function loadDefaultRows() {
+        const tbody = document.getElementById('table-body');
+        tbody.innerHTML = '';
+        for (let w = 50; w <= 150; w += 10) {
+            addRow(w, 20, '2.5', '');
+        }
+    }
+
     function deleteRow(btn) { btn.closest('tr').remove(); calculateAll(); }
     function moveUp(btn) { const row = btn.closest('tr'); if (row.previousElementSibling) row.parentNode.insertBefore(row, row.previousElementSibling); }
     function moveDown(btn) { const row = btn.closest('tr'); if (row.nextElementSibling) row.parentNode.insertBefore(row.nextElementSibling, row); }
- 
+
     function generatePDF(mode) {
         const rows = document.querySelectorAll('#table-body tr');
         let printTotalQty = 0;
- 
+
         let printHTML = `
-            <table class="pdf-table">
+            <table class="pdf-table ${mode === 'simple' ? 'pdf-table-simple' : ''}">
                 <thead>
                     <tr>
                         <th style="text-align: left;">Roll Size</th>
@@ -700,26 +843,30 @@ Rolls pricing · HTML
                         ${mode === 'full' ? `
                             <th style="text-align: right;">Unit Price (USD)</th>
                             <th style="text-align: right;">Line Total (USD)</th>
+                            <th style="text-align: right;">CBM (m&sup3;)</th>
+                            <th style="text-align: right;">Import Cost (USD)</th>
                         ` : ''}
                     </tr>
                 </thead>
                 <tbody>
         `;
- 
+
         rows.forEach((row) => {
             const w = row.querySelector('.w-val').value || '0';
             const l = row.querySelector('.l-val').value || '0';
             const t = row.querySelector('.t-val').value || '0';
             const noteInput = row.querySelector('.n-val').value.trim();
             const note = noteInput ? ` (${noteInput})` : '';
- 
+
             const q = parseInt(row.querySelector('.q-val').value) || 0;
             const uPrice = parseFloat(row.dataset.unitPrice) || 0;
             const lTotal = parseFloat(row.dataset.lineTotal) || 0;
- 
+            const lCbm = parseFloat(row.dataset.lineCbm) || 0;
+            const lImp = parseFloat(row.dataset.lineImportCost) || 0;
+
             printTotalQty += q;
             const rollSizeStr = `${w} cm &times; ${l} m &times; ${t} mm${note}`;
- 
+
             printHTML += `
                 <tr>
                     <td style="text-align: left;">${rollSizeStr}</td>
@@ -727,13 +874,15 @@ Rolls pricing · HTML
                     ${mode === 'full' ? `
                         <td style="text-align: right;">${formatMoneyD(uPrice)}</td>
                         <td style="text-align: right;">${formatMoneyD(lTotal)}</td>
+                        <td style="text-align: right;">${lCbm.toFixed(3)}</td>
+                        <td style="text-align: right;">${formatMoneyD(lImp)}</td>
                     ` : ''}
                 </tr>
             `;
         });
- 
+
         const totalIQD = printData.gtRolls * EXCHANGE_RATE;
- 
+
         printHTML += `
                 </tbody>
                 <tfoot>
@@ -743,12 +892,14 @@ Rolls pricing · HTML
                         ${mode === 'full' ? `
                             <td style="text-align: center;">-</td>
                             <td style="text-align: right;">${formatMoneyD(printData.gtRolls)}</td>
+                            <td style="text-align: right;">${globalTotalCBM.toFixed(3)}</td>
+                            <td style="text-align: right;">${formatMoneyD(globalImportCost)}</td>
                         ` : ''}
                     </tr>
                 </tfoot>
             </table>
         `;
- 
+
         if(mode === 'full') {
             printHTML += `
                 <table class="pdf-payments-table">
@@ -762,6 +913,15 @@ Rolls pricing · HTML
                             <td>إجمالي سعر الرولات</td>
                             <td>${formatMoneyD(printData.gtRolls)}</td>
                             <td>${formatMoney(printData.gtRolls * EXCHANGE_RATE)} د.ع</td>
+                        </tr>
+                        <tr>
+                            <td>إجمالي حجم الشحنة (CBM)</td>
+                            <td colspan="2" style="text-align: center; direction: ltr; color: #0f766e; font-family: 'Inter', sans-serif;">${globalTotalCBM.toFixed(3)} m&sup3;</td>
+                        </tr>
+                        <tr>
+                            <td>إجمالي تكلفة الاستيراد</td>
+                            <td>${formatMoneyD(globalImportCost)}</td>
+                            <td>${formatMoney(globalImportCost * globalImportExchangeRate)} د.ع</td>
                         </tr>
                         <tr>
                             <td>إجمالي عمولات علي بابا (${printData.aliPerc}%)</td>
@@ -794,15 +954,14 @@ Rolls pricing · HTML
                 </table>
             `;
         }
- 
+
         document.getElementById('print-area').innerHTML = printHTML;
         window.print();
     }
- 
+
     window.onload = function() {
-        calculateAll();
+        loadDefaultRows();
     };
 </script>
 </body>
 </html>
- 

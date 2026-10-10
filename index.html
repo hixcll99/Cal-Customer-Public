@@ -784,12 +784,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // سعر المتر الطولي حسب عرض الرولة
   function getLinearRateByWidth(widthCm){
-    // سلّم القياسات الصغيرة
-    if(widthCm <= 50)  return 12000;
-    if(widthCm <= 60)  return 13000;
-    if(widthCm <= 70)  return 14000;
-
-    // من 80 إلى 100 سم سعر المتر الطولي ثابت 15,000
+    // الي متر وأقل (مثلاً 50، 80، 100) سعر المتر الطولي ثابت 15,000
     if(widthCm <= 100) return 15000;
 
     // اللي أكبر من متر، ينحسب المتر الطولي حسب عرض الرولة (القياسات المتوفرة)
